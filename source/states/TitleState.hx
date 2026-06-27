@@ -304,6 +304,7 @@ class TitleState extends MusicBeatState {
 			transitioning = true;
 
 			call("checkForUpdate");
+			/*
 			#if CHECK_FOR_UPDATES
 			if(Options.getData("checkForUpdates")){
 				new FlxTimer().start(2, (tmr:FlxTimer) -> {
@@ -328,6 +329,7 @@ class TitleState extends MusicBeatState {
 				});
 			}
 			#end
+          */
 		}
 
 		if (pressedEnter && !skippedIntro) {
