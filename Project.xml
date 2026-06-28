@@ -122,7 +122,7 @@
 
 	<!-- Change the source folder path -->
 	<source path="source" />
-	<class path="C:/haxelib/funkin.vis" />
+	<class path="C:/haxelib/funkin.vis/src" />
     <class path="C:/haxelib/grig.audio" />
 	<class path="C:/haxelib/hxvlc/src" />
 
