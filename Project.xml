@@ -122,9 +122,9 @@
 
 	<!-- Change the source folder path -->
 	<source path="source" />
-	<class path="C:/haxelib/funkVis/src" />
-	<class path="C:/haxelib/grig.audio/src" />
-	<class path="C:/haxelib/hxvlc/src" />
+    <haxelib name="funkVis" />
+    <haxelib name="grig.audio" />
+    <haxelib name="hxvlc" />
 
 	<!-- Libraries -->
 	<haxelib name="flixel" />
