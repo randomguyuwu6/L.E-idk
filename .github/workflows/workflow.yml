@@ -73,15 +73,23 @@ jobs:
           haxelib install flixel-addons
           haxelib install flixel-ui
           haxelib install flixel-tools
-          haxelib install hscript
-          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
-          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
-          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
-          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
-          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkin.vis
-          haxelib git grig.audio https://github.com/HaxeGrig/grig.audio
+          git clone https://github.com/FNF-CNE-Devs/hscript-improved C:/haxelib/hscript-improved
+          git clone https://github.com/Vortex2Oblivion/scriptless-polymod C:/haxelib/scriptless-polymod
+          git clone https://github.com/Vortex2Oblivion/flxanimate C:/haxelib/flxanimate
+          git clone https://github.com/MAJigsaw77/hxdiscord_rpc C:/haxelib/hxdiscord_rpc
+          git clone https://github.com/Leather128/linc_luajit.git C:/haxelib/linc_luajit
+          git clone https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
+          git clone https://github.com/FunkinCrew/funkin.vis C:/haxelib/funkin.vis
+          git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting
+          haxelib dev hscript C:/haxelib/hscript-improved
+          haxelib dev scriptless-polymod C:/haxelib/scriptless-polymod
+          haxelib dev flxanimate C:/haxelib/flxanimate
+          haxelib dev hxdiscord_rpc C:/haxelib/hxdiscord_rpc
+          haxelib dev linc_luajit C:/haxelib/linc_luajit
+          haxelib dev hxvlc C:/haxelib/hxvlc
+          haxelib dev funkin.vis C:/haxelib/funkin.vis
+          haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev modcharting C:/haxelib/modcharting
           haxelib run lime setup -y
           haxelib run lime setup flixel
