@@ -67,7 +67,6 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib setup C:/haxelib
           haxelib install hxcpp
           haxelib install lime 8.1.2
           haxelib install openfl 9.3.3
@@ -79,6 +78,11 @@ jobs:
           haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
+          haxelib git thx.core https://github.com/fponticelli/thx.core
+          haxelib git thx.semver https://github.com/fponticelli/thx.semver.git
+          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
+          haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
           haxelib run lime setup flixel
           haxelib run lime setup
         shell: cmd
