@@ -62,18 +62,16 @@ jobs:
           haxe-version: 4.3.7
 
       - name: Install Haxelib
+        env:
+          HAXELIB_PATH: C:/haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install hxcpp
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.5.0
-          haxelib install flixel-addons
-          haxelib install flixel-ui
-          haxelib install flixel-tools
-          haxelib install hscript
-          haxelib install jsonpatch
-          haxelib install polymod
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib git lime https://github.com/haxefoundation/lime
+          haxelib git openfl https://github.com/openfl/openfl
+          haxelib git flixel https://github.com/HaxeFlixel/flixel
+          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons
+          haxelib git flixel-ui https://github.com/HaxeFlixel/flixel-ui
           git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
