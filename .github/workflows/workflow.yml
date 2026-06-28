@@ -108,7 +108,11 @@ jobs:
 
       - name: Compile
         run: |
-          haxelib run lime build windows -D fdn --app-version="4.0.0-${{ github.run_id }}"
+          # Esto nos mostrará en el log si el archivo realmente está donde creemos
+          dir /s /b C:\haxelib\funkVis\src\funkin\vis\dsp\SpectralAnalyzer.hx
+          
+          # Compilación forzada con classpath explícito
+          haxelib run lime build windows -D fdn -cp C:/haxelib/funkVis/src --app-version="4.0.0-${{ github.run_id }}"
         shell: cmd
 
       - name: Publish Artifact
