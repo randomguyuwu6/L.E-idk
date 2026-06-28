@@ -81,6 +81,10 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
           haxelib git hxNoise https://github.com/bbqx/hxNoise
+          haxelib dev hxcpp C:/haxelib/hxcpp/git
+          haxelib dev lime C:/haxelib/lime/git
+          haxelib dev openfl C:/haxelib/openfl/git
+          haxelib dev hxNoise C:/haxelib/hxNoise/git
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
