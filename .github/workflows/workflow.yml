@@ -79,15 +79,15 @@ jobs:
           git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
-          haxelib dev funkVis C:/haxelib/funkVis/src
-          haxelib dev grig.audio C:/haxelib/grig.audio/src
+          haxelib dev funkVis C:/haxelib/funkVis
+          haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev hxvlc C:/haxelib/hxvlc
         shell: cmd
 
       - name: Compile
         run: |
           haxelib run lime clean windows
-          haxelib run lime build windows Project.xml -D fdn --app-version="4.0.0-${{ github.run_id }}"
+          haxelib run lime build windows "%GITHUB_WORKSPACE%\Project.xml" -D fdn --app-version="4.0.0-%GITHUB_RUN_ID%"
         shell: cmd
 
       - name: Publish Artifact
