@@ -128,11 +128,11 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="hscript" />
-	<haxelib name="scriptless-polymod" if="MODDING_ALLOWED" />
+	<haxelib name="scriptless-polymod" />
 	<haxelib name="flxanimate" />
-	<haxelib name="hxdiscord_rpc" if="DISCORD_ALLOWED" />
-	<haxelib name="linc_luajit" if="LUA_ALLOWED" version="git" />
-	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />
+	<haxelib name="hxdiscord_rpc" />
+	<haxelib name="linc_luajit" />
+	<haxelib name="hxvlc" />
 	<haxelib name="modcharting" />
 	<haxelib name="funkin.vis" />
 	<haxelib name="grig.audio" />
