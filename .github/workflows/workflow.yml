@@ -67,24 +67,18 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
-          haxelib git lime https://github.com/haxefoundation/lime
-          haxelib git openfl https://github.com/openfl/openfl
-          haxelib git flixel https://github.com/HaxeFlixel/flixel
-          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons
-          haxelib git flixel-ui https://github.com/HaxeFlixel/flixel-ui
-          haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved
-          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
-          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
-          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
-          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
-          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
-          haxelib git hxNoise https://github.com/bbqx/hxNoise
-          haxelib dev hxcpp C:/haxelib/hxcpp/git
-          haxelib dev lime C:/haxelib/lime/git
-          haxelib dev openfl C:/haxelib/openfl/git
-          haxelib dev hxNoise C:/haxelib/hxNoise/git
+          haxelib install hxcpp
+          haxelib install lime 8.1.2
+          haxelib install openfl 9.3.3
+          haxelib install flixel 5.5.0
+          haxelib install flixel-addons
+          haxelib install flixel-ui
+          haxelib install flixel-tools
+          haxelib install hxNoise
+          haxelib install hscript-improved
+          haxelib install hxdiscord_rpc
+          haxelib install hxvlc
+          haxelib install scriptless-polymod
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
