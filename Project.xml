@@ -123,6 +123,7 @@
 	<!-- Change the source folder path -->
 	<source path="source" />
 	<class path="C:/haxelib/funkin.vis" />
+    <class path="C:/haxelib/grig.audio" />
 
 	<!-- Libraries -->
 	<haxelib name="flixel" />
@@ -135,6 +136,7 @@
 	<haxelib name="linc_luajit" />
 	<haxelib name="hxvlc" />
 	<haxelib name="modcharting" />
+	<haxelib name="hxCodec" />
 
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
