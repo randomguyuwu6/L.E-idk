@@ -81,6 +81,7 @@ jobs:
 
       - name: Compile
         run: |
+          cd /d %GITHUB_WORKSPACE%
           haxelib run lime clean windows
           haxelib run lime build windows Project.xml -D fdn --app-version="4.0.0-%GITHUB_RUN_ID%"
         shell: cmd
