@@ -136,7 +136,6 @@
 	<haxelib name="linc_luajit" />
 	<haxelib name="hxvlc" />
 	<haxelib name="modcharting" />
-	<haxelib name="hxCodec" />
 
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
