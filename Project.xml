@@ -135,7 +135,6 @@
 	<haxelib name="linc_luajit" />
 	<haxelib name="hxvlc" />
 	<haxelib name="modcharting" />
-	<haxelib name="grig.audio" />
 
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
