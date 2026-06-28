@@ -73,6 +73,9 @@ jobs:
           haxelib install flixel-addons
           haxelib install flixel-ui
           haxelib install flixel-tools
+          haxelib install hscript
+          haxelib install jsonpatch
+          haxelib install polymod
           git clone https://github.com/FNF-CNE-Devs/hscript-improved C:/haxelib/hscript-improved
           git clone https://github.com/Vortex2Oblivion/scriptless-polymod C:/haxelib/scriptless-polymod
           git clone https://github.com/Vortex2Oblivion/flxanimate C:/haxelib/flxanimate
@@ -82,6 +85,7 @@ jobs:
           git clone https://github.com/FunkinCrew/funkin.vis C:/haxelib/funkin.vis
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting
+          git clone https://github.com/polybiusproxy/hxCodec C:/haxelib/hxCodec
           haxelib dev hscript C:/haxelib/hscript-improved
           haxelib dev scriptless-polymod C:/haxelib/scriptless-polymod
           haxelib dev flxanimate C:/haxelib/flxanimate
@@ -91,6 +95,7 @@ jobs:
           haxelib dev funkin.vis C:/haxelib/funkin.vis
           haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev modcharting C:/haxelib/modcharting
+          haxelib dev hxCodec C:/haxelib/hxCodec
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
