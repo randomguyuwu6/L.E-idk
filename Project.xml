@@ -65,7 +65,7 @@
 		vsync="false"
 	/>
 
-	<!-- Path Settings. -->
+	<!--  Settings. -->
 
 	<assets path="assets/preload" rename="assets" />
 
@@ -122,9 +122,9 @@
 
 	<!-- Change the source folder path -->
 	<source path="source" />
-    <haxelib name="funkVis" />
-    <haxelib name="grig.audio" />
-    <haxelib name="hxvlc" />
+    <class path="C:/haxelib/funkVis/src" />
+    <class path="C:/haxelib/grig.audio/src" />
+    <class path="C:/haxelib/hxvlc/src" />
 
 	<!-- Libraries -->
 	<haxelib name="flixel" />
