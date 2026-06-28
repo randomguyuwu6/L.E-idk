@@ -124,12 +124,7 @@
 	<source path="source" />
 
 	<!-- Libraries -->
-	<class path="C:/haxelib/funkVis/src" />
-    <class path="C:/haxelib/grig.audio/src" />
-    <class path="C:/haxelib/flxanimate" />
-    <class path="C:/haxelib/scriptless-polymod" />
-    
-    <haxelib name="flixel" />
+	<haxelib name="flixel" />
     <haxelib name="flixel-addons" />
     <haxelib name="flixel-ui" />
     <haxelib name="hscript" />
@@ -137,6 +132,8 @@
     <haxelib name="linc_luajit" />
     <haxelib name="hxvlc" />
     <haxelib name="modcharting" />
+    <class path="C:/haxelib/funkVis/src" />
+    <class path="C:/haxelib/grig.audio/src" />
 		
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
