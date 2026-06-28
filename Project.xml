@@ -122,9 +122,6 @@
 
 	<!-- Change the source folder path -->
 	<source path="source" />
-    <class path="C:/haxelib/funkVis/src" />
-    <class path="C:/haxelib/grig.audio/src" />
-    <class path="C:/haxelib/hxvlc/src" />
 
 	<!-- Libraries -->
 	<haxelib name="flixel" />
@@ -136,7 +133,9 @@
 	<haxelib name="hxdiscord_rpc" />
 	<haxelib name="linc_luajit" />
 	<haxelib name="hxvlc" />
-	<haxelib name="modcharting" />
+	<haxelib name="modcharting" />>
+		<class path="C:/haxelib/funkVis/src" />
+    <class path="C:/haxelib/grig.audio/src" />
 
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
