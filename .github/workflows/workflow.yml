@@ -80,7 +80,7 @@ jobs:
       - name: Compile
         run: |
           haxelib run lime clean windows
-          haxelib run lime build windows "%GITHUB_WORKSPACE%/Project.xml" -D fdn --app-version="4.0.0-%GITHUB_RUN_ID%"
+          haxelib run lime build windows "%GITHUB_WORKSPACE%/Project.xml" -D fdn
         shell: cmd
 
       - name: Publish Artifact
