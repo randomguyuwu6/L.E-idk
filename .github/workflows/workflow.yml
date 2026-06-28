@@ -78,8 +78,8 @@ jobs:
           haxelib install hscript
           haxelib install jsonpatch
           haxelib install polymod
-          if exist C:/haxelib/funkin.vis rmdir /s /q C:/haxelib/funkin.vis
-          git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkin.vis
+          if exist C:/haxelib/funkVis rmdir /s /q C:/haxelib/funkVis
+          git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone https://github.com/FNF-CNE-Devs/hscript-improved C:/haxelib/hscript-improved
           git clone https://github.com/Vortex2Oblivion/scriptless-polymod C:/haxelib/scriptless-polymod
           git clone https://github.com/Vortex2Oblivion/flxanimate C:/haxelib/flxanimate
@@ -94,12 +94,11 @@ jobs:
           haxelib dev flxanimate C:/haxelib/flxanimate
           haxelib dev hxdiscord_rpc C:/haxelib/hxdiscord_rpc
           haxelib dev linc_luajit C:/haxelib/linc_luajit
-          haxelib dev funkin.vis C:/haxelib/funkin.vis
+          haxelib dev funkVis C:/haxelib/funkVis
           haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev modcharting C:/haxelib/modcharting
           haxelib dev hxCodec C:/haxelib/hxCodec
           haxelib dev hxvlc C:/haxelib/hxvlc
-          
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
