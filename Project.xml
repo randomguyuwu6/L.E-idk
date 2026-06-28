@@ -128,13 +128,13 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="hscript" />
-	<haxelib name="flxanimate" />
 	<haxelib name="hxdiscord_rpc" />
 	<haxelib name="linc_luajit" />
 	<haxelib name="hxvlc" />
 	<haxelib name="modcharting" />
-<class path="C:/haxelib/funkVis/src" />
+    <class path="C:/haxelib/funkVis/src" />
     <class path="C:/haxelib/grig.audio/src" />
+    <class path="C:/haxelib/flxanimate" />
     <class path="C:/haxelib/scriptless-polymod" />
 		
 	<!-- Compiler Arguments -->
