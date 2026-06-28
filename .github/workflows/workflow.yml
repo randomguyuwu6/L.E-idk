@@ -83,9 +83,11 @@ jobs:
           haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
           haxelib git jsonpath https://github.com/EliteMasterEric/jsonpath
           haxelib git jsonpatch https://github.com/EliteMasterEric/jsonpatch
+          haxelib git hxNoise https://github.com/bbqx/hxNoise
+          haxelib git polymod https://github.com/larsiusprime/polymod
+          haxelib git SScript https://github.com/nebulazorua/SScript
           haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib run lime rebuild windows
+          haxelib run lime setu
         shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
