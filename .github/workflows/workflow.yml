@@ -74,6 +74,7 @@ jobs:
           git clone --depth 1 https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone --depth 1 https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone --depth 1 https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
+          git clone --depth 1 https://github.com/Dot-Stuff/flxanimate C:/haxelib/flxanimate
           haxelib dev funkVis C:/haxelib/funkVis
           haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev hxvlc C:/haxelib/hxvlc
