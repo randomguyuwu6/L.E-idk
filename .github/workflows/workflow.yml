@@ -79,9 +79,10 @@ jobs:
           haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
           haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
           haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
-          haxelib git modcharting https://github.com/KadeDev/fnf-modcharting-tools
           haxelib git funkin.vis https://github.com/FunkinCrew/funkin.vis
           haxelib git grig.audio https://github.com/HaxeGrig/grig.audio
+          git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting/git
+          haxelib dev modcharting C:/haxelib/modcharting/git
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
