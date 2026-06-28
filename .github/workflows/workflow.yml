@@ -64,17 +64,19 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install hxcpp
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.5.0
-          haxelib install flixel-addons
-          haxelib install flixel-ui
-          haxelib install hscript
-          git clone --depth 1 https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
-          haxelib dev hxvlc C:/haxelib/hxvlc
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib git lime https://github.com/haxefoundation/lime
+          haxelib git openfl https://github.com/openfl/openfl
+          haxelib git flixel https://github.com/HaxeFlixel/flixel
+          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons
+          haxelib git flixel-ui https://github.com/HaxeFlixel/flixel-ui
+          haxelib git hscript https://github.com/HaxeFoundation/hscript
           git clone --depth 1 https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone --depth 1 https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
+          git clone --depth 1 https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
+          haxelib dev funkVis C:/haxelib/funkVis
+          haxelib dev grig.audio C:/haxelib/grig.audio
+          haxelib dev hxvlc C:/haxelib/hxvlc
         shell: cmd
 
       - name: Compile
