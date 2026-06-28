@@ -122,6 +122,7 @@
 
 	<!-- Change the source folder path -->
 	<source path="source" />
+	<class path="C:/haxelib/funkin.vis" />
 
 	<!-- Libraries -->
 	<haxelib name="flixel" />
@@ -134,7 +135,6 @@
 	<haxelib name="linc_luajit" />
 	<haxelib name="hxvlc" />
 	<haxelib name="modcharting" />
-	<haxelib name="funkin.vis" />
 	<haxelib name="grig.audio" />
 
 	<!-- Compiler Arguments -->
