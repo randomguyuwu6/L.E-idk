@@ -76,8 +76,6 @@ jobs:
           haxelib install hscript
           haxelib install jsonpatch
           haxelib install polymod
-          
-          # Clonación de repositorios
           if exist C:/haxelib/funkVis rmdir /s /q C:/haxelib/funkVis
           git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone https://github.com/FNF-CNE-Devs/hscript-improved C:/haxelib/hscript-improved
@@ -89,8 +87,6 @@ jobs:
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting
           git clone https://github.com/polybiusproxy/hxCodec C:/haxelib/hxCodec
-          
-          # Registro único de librerías
           haxelib dev hscript C:/haxelib/hscript-improved
           haxelib dev scriptless-polymod C:/haxelib/scriptless-polymod
           haxelib dev flxanimate C:/haxelib/flxanimate
@@ -108,11 +104,8 @@ jobs:
 
       - name: Compile
         run: |
-          # Esto nos mostrará en el log si el archivo realmente está donde creemos
           dir /s /b C:\haxelib\funkVis\src\funkin\vis\dsp\SpectralAnalyzer.hx
-          
-          # Compilación forzada con classpath explícito
-          haxelib run lime build windows -D fdn -cp C:/haxelib/funkVis/src --app-version="4.0.0-${{ github.run_id }}"
+          haxelib run lime build windows Project.xml -D fdn -cp C:/haxelib/funkVis/src --app-version="4.0.0-${{ github.run_id }}"
         shell: cmd
 
       - name: Publish Artifact
