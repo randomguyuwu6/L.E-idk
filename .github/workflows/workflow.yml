@@ -67,7 +67,15 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          ./build/install_libraries.bat
+          haxelib install hxcpp
+          haxelib install lime 8.1.2
+          haxelib install openfl 9.3.3
+          haxelib install flixel 5.5.0
+          haxelib install flixel-addons
+          haxelib install flixel-ui
+          haxelib install flixel-tools
+          haxelib run lime setup flixel
+          haxelib run lime setup
         shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
