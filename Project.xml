@@ -128,10 +128,7 @@
     <haxelib name="flixel-addons" />
     <haxelib name="flixel-ui" />
     <haxelib name="hscript" />
-    <haxelib name="hxdiscord_rpc" />
-    <haxelib name="linc_luajit" />
     <haxelib name="hxvlc" />
-    <haxelib name="modcharting" />
     <class path="C:/haxelib/funkVis/src" />
     <class path="C:/haxelib/grig.audio/src" />
 		
