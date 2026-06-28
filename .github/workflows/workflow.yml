@@ -77,6 +77,8 @@ jobs:
           git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
+          git clone https://github.com/Dot-Stuff/flxanimate C:/haxelib/flxanimate
+          git clone https://github.com/MAJigsaw77/scriptless-polymod C:/haxelib/scriptless-polymod
         shell: cmd
 
       - name: Compile
