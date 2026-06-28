@@ -92,12 +92,11 @@ jobs:
           haxelib dev flxanimate C:/haxelib/flxanimate
           haxelib dev hxdiscord_rpc C:/haxelib/hxdiscord_rpc
           haxelib dev linc_luajit C:/haxelib/linc_luajit
-          haxelib dev funkVis C:/haxelib/funkVis
+          haxelib dev funkVis C:/haxelib/funkVis/src
           haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev modcharting C:/haxelib/modcharting
           haxelib dev hxCodec C:/haxelib/hxCodec
           haxelib dev hxvlc C:/haxelib/hxvlc
-          
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
