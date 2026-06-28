@@ -83,7 +83,6 @@ jobs:
           git clone https://github.com/Vortex2Oblivion/flxanimate C:/haxelib/flxanimate
           git clone https://github.com/MAJigsaw77/hxdiscord_rpc C:/haxelib/hxdiscord_rpc
           git clone https://github.com/Leather128/linc_luajit.git C:/haxelib/linc_luajit
-          git clone https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
           git clone https://github.com/FunkinCrew/funkin.vis C:/haxelib/funkin.vis
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting
@@ -93,7 +92,6 @@ jobs:
           haxelib dev flxanimate C:/haxelib/flxanimate
           haxelib dev hxdiscord_rpc C:/haxelib/hxdiscord_rpc
           haxelib dev linc_luajit C:/haxelib/linc_luajit
-          haxelib dev hxvlc C:/haxelib/hxvlc
           haxelib dev funkin.vis C:/haxelib/funkin.vis
           haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev modcharting C:/haxelib/modcharting
