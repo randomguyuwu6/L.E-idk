@@ -73,7 +73,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install flixel-ui
           haxelib install flixel-tools
-          haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved
+          haxelib install hscript
           haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
           haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
           haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
@@ -81,7 +81,8 @@ jobs:
           haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
           haxelib git funkin.vis https://github.com/FunkinCrew/funkin.vis
           haxelib git grig.audio https://github.com/HaxeGrig/grig.audio
-          git clone https://github.com/KadeDev/fnf-modcharting-tools ./modcharting
+          git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting
+          haxelib dev modcharting C:/haxelib/modcharting
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
