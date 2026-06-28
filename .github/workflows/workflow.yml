@@ -73,17 +73,24 @@ jobs:
           haxelib install flixel-addons
           haxelib install flixel-ui
           haxelib install flixel-tools
-          haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved --always
-          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc --always
-          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc --always
-          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod --always
-          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate --always
-          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git --always
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec --always
-          haxelib git fnf-modcharting-tools https://github.com/KadeDev/fnf-modcharting-tools --always
-          haxelib git hxNoise https://github.com/bbqx/hxNoise --always
+          haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved
+          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
+          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
+          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
+          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
+          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
+          haxelib git modcharting https://github.com/KadeDev/fnf-modcharting-tools
+          haxelib git funkin.vis https://github.com/FunkinCrew/funkin.vis
+          haxelib git grig.audio https://github.com/HaxeGrig/grig.audio
           haxelib run lime setup -y
           haxelib run lime setup flixel
+        shell: cmd
+
+      - name: Register Libraries
+        run: |
+          haxelib dev hscript C:/haxelib/hscript-improved/git
+          haxelib dev modcharting C:/haxelib/modcharting/git
+          haxelib dev flxanimate C:/haxelib/flxanimate/git
         shell: cmd
 
       - name: Create Version Tag
