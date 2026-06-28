@@ -57,36 +57,39 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
 
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.7
-      # Runs a set of commands using the runners shell
+
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install hxcpp
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.5.0
-          haxelib install flixel-addons
-          haxelib install flixel-ui
-          haxelib install flixel-tools
-          haxelib install hxNoise
-          haxelib install hscript-improved
-          haxelib install hxdiscord_rpc
-          haxelib install hxvlc
-          haxelib install scriptless-polymod
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib git lime https://github.com/haxefoundation/lime
+          haxelib git openfl https://github.com/openfl/openfl
+          haxelib git flixel https://github.com/HaxeFlixel/flixel
+          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons
+          haxelib git flixel-ui https://github.com/HaxeFlixel/flixel-ui
+          haxelib git flixel-tools https://github.com/HaxeFlixel/flixel-tools
+          haxelib git hxNoise https://github.com/bbqx/hxNoise
+          haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved
+          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
+          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
+          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
+
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
+
       - name: Compile
         run: |
-          haxelib --always run lime build windows --app-version="4.0.0-${{ github.run_id}}"
+          haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
+        shell: cmd
+
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
