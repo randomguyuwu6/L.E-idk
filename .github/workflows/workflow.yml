@@ -55,10 +55,8 @@ jobs:
 
   buildWindows:
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@main
-
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.7
@@ -67,7 +65,7 @@ jobs:
         env:
           HAXELIB_PATH: C:/haxelib
         run: |
-         haxelib setup C:/haxelib
+          haxelib setup C:/haxelib
           haxelib install hxcpp
           haxelib install lime 8.1.2
           haxelib install openfl 9.3.3
@@ -78,6 +76,8 @@ jobs:
           haxelib install hscript
           haxelib install jsonpatch
           haxelib install polymod
+          
+          # Clonación de repositorios
           if exist C:/haxelib/funkVis rmdir /s /q C:/haxelib/funkVis
           git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
           git clone https://github.com/FNF-CNE-Devs/hscript-improved C:/haxelib/hscript-improved
@@ -89,6 +89,8 @@ jobs:
           git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
           git clone https://github.com/KadeDev/fnf-modcharting-tools C:/haxelib/modcharting
           git clone https://github.com/polybiusproxy/hxCodec C:/haxelib/hxCodec
+          
+          # Registro único de librerías
           haxelib dev hscript C:/haxelib/hscript-improved
           haxelib dev scriptless-polymod C:/haxelib/scriptless-polymod
           haxelib dev flxanimate C:/haxelib/flxanimate
@@ -99,23 +101,14 @@ jobs:
           haxelib dev modcharting C:/haxelib/modcharting
           haxelib dev hxCodec C:/haxelib/hxCodec
           haxelib dev hxvlc C:/haxelib/hxvlc
+          
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
 
-      - name: Register Libraries
-        run: |
-          haxelib dev hscript C:/haxelib/hscript-improved/git
-          haxelib dev modcharting C:/haxelib/modcharting/git
-          haxelib dev flxanimate C:/haxelib/flxanimate/git
-        shell: cmd
-
-      - name: Create Version Tag
-        run: echo "${{github.run_id}}" > VERSION
-
       - name: Compile
         run: |
-          haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
+          haxelib run lime build windows -D fdn --app-version="4.0.0-${{ github.run_id }}"
         shell: cmd
 
       - name: Publish Artifact
