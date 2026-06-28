@@ -103,6 +103,7 @@ jobs:
 
       - name: Compile
         run: |
+          if exist C:/haxelib/.dev/funkVis del /q C:/haxelib/.dev/funkVis
           haxelib run lime clean windows
           haxelib run lime build windows -D fdn --app-version="4.0.0-${{ github.run_id }}"
         shell: cmd
