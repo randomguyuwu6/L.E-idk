@@ -104,8 +104,7 @@ jobs:
 
       - name: Compile
         run: |
-          dir /s /b C:\haxelib\funkVis\src\funkin\vis\dsp\SpectralAnalyzer.hx
-          haxelib run lime build windows Project.xml -D fdn -cp C:/haxelib/funkVis/src --app-version="4.0.0-${{ github.run_id }}"
+          haxelib run lime build windows -D fdn --app-version="4.0.0-${{ github.run_id }}"
         shell: cmd
 
       - name: Publish Artifact
