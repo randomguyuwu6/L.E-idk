@@ -82,6 +82,7 @@ jobs:
 
       - name: Compile
         run: |
+          dir C:\haxelib\flxanimate /s
           haxelib run lime clean windows
           haxelib run lime build windows -D fdn
         shell: cmd
