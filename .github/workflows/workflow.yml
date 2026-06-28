@@ -79,9 +79,7 @@ jobs:
           haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
           haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
           haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
-          haxelib dev hxcpp C:/haxelib/hxcpp/git
-          haxelib dev lime C:/haxelib/lime/git
-          haxelib dev flxanimate C:/haxelib/flxanimate/git
+          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
           haxelib run lime setup -y
           haxelib run lime setup flixel
         shell: cmd
