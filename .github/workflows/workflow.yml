@@ -66,17 +66,23 @@ jobs:
           HAXELIB_PATH: C:/haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
-          haxelib git lime https://github.com/haxefoundation/lime
-          haxelib git openfl https://github.com/openfl/openfl
-          haxelib git flixel https://github.com/HaxeFlixel/flixel
-          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons
-          haxelib git flixel-ui https://github.com/HaxeFlixel/flixel-ui
-          git clone https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
-          git clone https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
-          git clone https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
-          git clone https://github.com/Dot-Stuff/flxanimate C:/haxelib/flxanimate
-          git clone https://github.com/MAJigsaw77/scriptless-polymod C:/haxelib/scriptless-polymod
+          git clone --depth 1 https://github.com/HaxeFoundation/hxcpp C:/haxelib/hxcpp
+          git clone --depth 1 https://github.com/haxefoundation/lime C:/haxelib/lime
+          git clone --depth 1 https://github.com/openfl/openfl C:/haxelib/openfl
+          git clone --depth 1 https://github.com/HaxeFlixel/flixel C:/haxelib/flixel
+          git clone --depth 1 https://github.com/HaxeFlixel/flixel-addons C:/haxelib/flixel-addons
+          git clone --depth 1 https://github.com/HaxeFlixel/flixel-ui C:/haxelib/flixel-ui
+          git clone --depth 1 https://github.com/FunkinCrew/funkVis C:/haxelib/funkVis
+          git clone --depth 1 https://github.com/HaxeGrig/grig.audio C:/haxelib/grig.audio
+          git clone --depth 1 https://github.com/MAJigsaw77/hxvlc C:/haxelib/hxvlc
+          git clone --depth 1 https://github.com/Dot-Stuff/flxanimate C:/haxelib/flxanimate
+          git clone --depth 1 https://github.com/MAJigsaw77/scriptless-polymod C:/haxelib/scriptless-polymod
+          haxelib dev hxcpp C:/haxelib/hxcpp
+          haxelib dev lime C:/haxelib/lime
+          haxelib dev openfl C:/haxelib/openfl
+          haxelib dev flixel C:/haxelib/flixel
+          haxelib dev flixel-addons C:/haxelib/flixel-addons
+          haxelib dev flixel-ui C:/haxelib/flixel-ui
         shell: cmd
 
       - name: Compile
