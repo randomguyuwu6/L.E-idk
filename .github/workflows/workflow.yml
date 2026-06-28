@@ -104,6 +104,7 @@ jobs:
 
       - name: Compile
         run: |
+          haxelib run lime clean windows
           haxelib run lime build windows -D fdn --app-version="4.0.0-${{ github.run_id }}"
         shell: cmd
 
