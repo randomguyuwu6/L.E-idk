@@ -128,10 +128,10 @@
     <haxelib name="flixel-addons" />
     <haxelib name="flixel-ui" />
     <haxelib name="hscript" />
-    <haxelib name="hxvlc" />
-    <haxelib name="flxanimate" />
-    <class path="C:/haxelib/funkVis" />
-    <class path="C:/haxelib/grig.audio/src" />
+    <class path="C:/haxelib/funkVis" /> 
+    <class path="C:/haxelib/grig.audio" />
+    <class path="C:/haxelib/hxvlc" />
+    <class path="C:/haxelib/flxanimate" />
 		
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
