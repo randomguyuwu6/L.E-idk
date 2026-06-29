@@ -80,7 +80,7 @@ jobs:
         shell: cmd
         run: |
           haxelib run lime clean windows
-          haxelib run lime build windows -D fdn
+          haxelib run lime build windows -D fdn -verbose
 
       - name: Publish Artifact
         uses: actions/upload-artifact@main
