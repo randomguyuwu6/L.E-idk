@@ -131,7 +131,7 @@
     <haxelib name="hxvlc" />
     <class path="C:/haxelib/funkVis/src" />
     <class path="C:/haxelib/grig.audio/src" />
-    <class path="C:/haxelib/flxanimate" />
+    <haxelib name="flxanimate" />
 		
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
