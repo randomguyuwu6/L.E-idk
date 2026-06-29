@@ -130,7 +130,7 @@
     <haxelib name="hscript" />
     <haxelib name="hxvlc" />
     <haxelib name="flxanimate" />
-    <class path="C:/haxelib/funkVis/src" />
+    <class path="C:/haxelib/funkVis" />
     <class path="C:/haxelib/grig.audio/src" />
 		
 	<!-- Compiler Arguments -->
