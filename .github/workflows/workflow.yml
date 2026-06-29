@@ -4,33 +4,24 @@ name: Build Game
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   buildLinux:
     runs-on: ubuntu-latest
-
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
-
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.7
-
-      # Runs a set of commands using the runners shell
       - name: Install libvlc
         run: sudo apt-get install -y libvlc-dev libvlccore-dev
-
       - name: Install lime dependencies
         run: sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev g++ g++-multilib gcc-multilib libasound2-dev libx11-dev libxext-dev libxi-dev libxrandr-dev libxinerama-dev
-
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
@@ -62,6 +53,7 @@ jobs:
           haxe-version: 4.3.7
 
       - name: Install Haxelib
+        shell: cmd
         run: |
           haxelib setup C:/haxelib
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
@@ -78,13 +70,13 @@ jobs:
           haxelib dev funkVis C:/haxelib/funkVis
           haxelib dev grig.audio C:/haxelib/grig.audio
           haxelib dev hxvlc C:/haxelib/hxvlc
-        shell: cmd
+          haxelib dev flxanimate C:/haxelib/flxanimate
 
       - name: Compile
+        shell: cmd
         run: |
           haxelib run lime clean windows
           haxelib run lime build windows -D fdn
-        shell: cmd
 
       - name: Publish Artifact
         uses: actions/upload-artifact@main
@@ -94,15 +86,11 @@ jobs:
 
   buildMac:
     runs-on: macos-13
-
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
-
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.7
-      # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
