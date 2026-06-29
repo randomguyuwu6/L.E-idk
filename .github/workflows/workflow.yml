@@ -72,6 +72,10 @@ jobs:
           haxelib dev hxvlc C:/haxelib/hxvlc
           haxelib dev flxanimate C:/haxelib/flxanimate
 
+      - name: Debug Folder Structure
+        shell: cmd
+        run: dir C:\haxelib\funkVis /s
+
       - name: Compile
         shell: cmd
         run: |
