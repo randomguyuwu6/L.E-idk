@@ -83,9 +83,9 @@
 	<assets path="build/linux_dependencies.txt" rename='linux_dependencies.txt' if="linux" />
 
 	<!-- Libraries -->
-	<haxelib name="flixel" />
-	<haxelib name="flixel-addons" />
-	<haxelib name="flixel-ui" />
+	<haxelib name="flixel" version="4.11.0" />
+	<haxelib name="flixel-addons" version="2.11.0" />
+	<haxelib name="flixel-ui" version="2.4.0" />
 	<haxelib name="hscript-improved"/>
 	<haxelib name="scriptless-polymod" if="MODDING_ALLOWED" />
 	<haxelib name="flxanimate" />
@@ -103,7 +103,6 @@
 
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
-	<haxedef name="FLX_NO_HEALTH" /> <!--Remove dumb health variable from FlxSprite -->
 
 
 	<haxedef name="openfl_enable_experimental_update_queue" />
