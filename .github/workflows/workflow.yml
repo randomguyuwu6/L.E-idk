@@ -97,7 +97,9 @@ jobs:
       - name: Compile
         shell: bash
         run: |
-          haxelib run lime build windows -release -D lime-native -D no-deprecation-warnings
+          find source -name "*.hx" -type f -exec sed -i 's/import flixel.sound.FlxSound;/import flixel.system.FlxSound;/g' {} +
+          haxelib run lime clean windows
+          haxelib run lime build windows -release -D lime-native
           
       - name: Publish Artifact
         uses: actions/upload-artifact@main
