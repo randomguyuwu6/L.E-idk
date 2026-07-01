@@ -92,7 +92,7 @@ jobs:
           haxelib run lime setup
           haxelib install flixel-tools
           haxelib git flixel-ui https://github.com/HaxeFlixel/flixel-ui
-          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons
+          haxelib install flixel-addons 3.3.2
           haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
           haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved codename-dev
           haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
