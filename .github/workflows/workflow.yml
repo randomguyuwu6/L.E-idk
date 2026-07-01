@@ -92,15 +92,12 @@ jobs:
           haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
           haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
           haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
-          haxelib dev flixel ~/haxelib/flixel/4,11,0
-          haxelib dev lime ~/haxelib/lime/8,1,3
-          haxelib dev openfl ~/haxelib/openfl/9,2,1
+          haxelib run lime setup -y
 
       - name: Compile
         shell: bash
         run: |
-          haxelib run lime setup -y
-          haxelib run lime build windows -release
+          haxelib run lime build windows -release -D lime-native
           
       - name: Publish Artifact
         uses: actions/upload-artifact@main
