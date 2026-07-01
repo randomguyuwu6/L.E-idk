@@ -83,16 +83,18 @@
 	<assets path="build/linux_dependencies.txt" rename='linux_dependencies.txt' if="linux" />
 
 	<!-- Libraries -->
+	<haxelib name="lime" version="8.1.3" />
+	<haxelib name="openfl" version="9.2.1" />
 	<haxelib name="flixel" version="4.11.0" />
 	<haxelib name="flixel-addons" version="2.11.0" />
 	<haxelib name="flixel-ui" version="2.4.0" />
-	<haxelib name="hscript-improved"/>
+	<haxelib name="hscript-improved" />
 	<haxelib name="scriptless-polymod" if="MODDING_ALLOWED" />
 	<haxelib name="flxanimate" />
 	<haxelib name="discord_rpc" if="DISCORD_ALLOWED" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED" version="git" />
 	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />
-	<haxelib name="hxNoise"/>
+	<haxelib name="hxNoise" />
 	<haxelib name="fnf-modcharting-tools" unless="hl" />
 	<haxelib name="funkin.vis" />
 	<haxelib name="grig.audio" />
