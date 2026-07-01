@@ -96,6 +96,7 @@ jobs:
       - name: Compile
         shell: bash
         run: |
+          haxelib run lime setup -y
           haxelib run lime build windows -release
           
       - name: Publish Artifact
