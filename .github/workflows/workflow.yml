@@ -73,6 +73,7 @@ jobs:
       - name: Install Haxelib
         shell: bash
         run: |
+          rm -rf ~/haxelib
           haxelib setup ~/haxelib
           haxelib install lime 8.1.3
           haxelib install openfl 9.2.1
@@ -91,7 +92,9 @@ jobs:
           haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
           haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
           haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
-          haxelib run lime setup -y
+          haxelib dev flixel ~/haxelib/flixel/4,11,0
+          haxelib dev lime ~/haxelib/lime/8,1,3
+          haxelib dev openfl ~/haxelib/openfl/9,2,1
 
       - name: Compile
         shell: bash
