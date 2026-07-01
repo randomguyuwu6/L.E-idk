@@ -100,8 +100,11 @@ jobs:
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.sound.FlxSound;/import flixel.system.FlxSound;/g' {} +
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.addons.display.FlxRuntimeShader;/\/\/ import flixel.addons.display.FlxRuntimeShader;/g' {} +
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.system.FlxShader;/\/\/ import flixel.system.FlxShader;/g' {} +
-          haxelib run lime clean windows
-          haxelib run lime build windows -release -D lime-native
+          mkdir -p ~/haxelib/fnf-modcharting-tools/git/source/game/
+          cp -r source/game/* ~/haxelib/fnf-modcharting-tools/git/source/game/ || true
+          
+          # 3. Compilar limpio
+          haxelib run lime build windows -release
           
       - name: Publish Artifact
         uses: actions/upload-artifact@main
