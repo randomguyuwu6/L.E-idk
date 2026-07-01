@@ -100,7 +100,7 @@ jobs:
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
         run: |
-          haxelib --always run lime build windows --app-version="4.0.0-${{ github.run_id}}"
+          haxelib run lime build windows -D flixel -D openfl -D lime --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
