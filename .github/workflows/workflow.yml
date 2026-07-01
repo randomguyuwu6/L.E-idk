@@ -84,7 +84,9 @@ jobs:
           haxelib install flixel-addons 2.11.0
           haxelib install flixel-ui 2.4.0
           haxelib install hscript 2.4.0
+          # Instalamos todo lo que falta de una sola vez
           haxelib git hscript-improved https://github.com/FNF-CNE-Devs/hscript-improved codename-dev
+          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
           haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
           haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
@@ -94,6 +96,7 @@ jobs:
           haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
           haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
           haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
+          haxelib run lime setup -y
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
