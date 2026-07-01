@@ -100,7 +100,7 @@ jobs:
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
         run: |
-          haxelib run lime build windows -clean -o export
+          haxelib run lime build windows -clean -D release -D desktop --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
