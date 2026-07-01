@@ -98,8 +98,8 @@ jobs:
         shell: bash
         run: |
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.sound.FlxSound;/import flixel.system.FlxSound;/g' {} +
-          find source -name "*.hx" -type f -exec sed -i 's/import flixel.addons.display.FlxRuntimeShader;/import flixel.addons.display.FlxRuntimeShader;/g' {} +
-          find source -name "*.hx" -type f -exec sed -i 's/import flixel.addons.display.FlxRuntimeShader;/import flixel.system.FlxShader;/g' {} +
+          find source -name "*.hx" -type f -exec sed -i 's/import flixel.addons.display.FlxRuntimeShader;/\/\/ import flixel.addons.display.FlxRuntimeShader;/g' {} +
+          find source -name "*.hx" -type f -exec sed -i 's/import flixel.system.FlxShader;/\/\/ import flixel.system.FlxShader;/g' {} +
           haxelib run lime clean windows
           haxelib run lime build windows -release
           
