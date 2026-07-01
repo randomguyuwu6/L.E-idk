@@ -97,7 +97,7 @@ jobs:
       - name: Compile
         shell: bash
         run: |
-          haxelib run lime build windows -release -D lime-native
+          haxelib run lime build windows -release -D lime-native -D no-deprecation-warnings
           
       - name: Publish Artifact
         uses: actions/upload-artifact@main
