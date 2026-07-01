@@ -302,28 +302,8 @@ class TitleState extends MusicBeatState {
 
 			transitioning = true;
 
-			call("checkForUpdate");
-			new FlxTimer().start(2, (tmr:FlxTimer) -> {
-				var http:Http = new Http("https://raw.githubusercontent.com/Vortex2Oblivion/LeatherEngine/main/version.txt");
-				http.onData = (data:String) -> {
-					data = 'v' + data;
-					trace(data);
-
-					if (CoolUtil.getCurrentVersion() != data) {
-						trace('Outdated Version Detected! ' + data.trim() + ' != ' + CoolUtil.getCurrentVersion(), WARNING);
-						Main.display.version += ' - UPDATE AVALIABLE (${data.trim()})';
-						FlxG.switchState(new OutdatedSubState(data.trim()));
-					} else {
-						FlxG.switchState(new MainMenuState());
-					}
-				}
-
-				http.onError = (error:String) -> {
-					trace('$error', ERROR);
-					FlxG.switchState(new MainMenuState()); // fail so we go anyway
-				}
-
-				http.request();
+			new FlxTimer().start(0.5, (tmr:FlxTimer) -> {
+				FlxG.switchState(new MainMenuState());
 			});
 		}
 
