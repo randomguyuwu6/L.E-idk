@@ -4,7 +4,7 @@ import openfl.utils.Assets;
 import states.PlayState;
 import game.ResultScore;
 import utilities.ScoringRank;
-import flixel.sound.FlxSound;
+import flixel.system.FlxSound;
 import flixel.FlxG;
 import states.StoryMenuState;
 import game.FlxAtlasSprite;
