@@ -30,9 +30,22 @@ jobs:
 
       - name: Install Haxelib
         run: |
-          haxelib setup ~/haxelib
-          haxelib install hmm --quiet
-          haxelib run hmm install
+          haxelib setup C:/haxelib
+          haxelib install lime 7.9.0
+          haxelib install openfl 9.1.0
+          haxelib install flixel 4.11.0
+          haxelib install flixel-addons 2.11.0
+          haxelib install flixel-ui 2.4.0
+          haxelib install hscript 2.4.0
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
+          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
+          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
+          haxelib git hxNoise https://github.com/whuop/hxNoise
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
+          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
+          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile Linux
@@ -63,8 +76,21 @@ jobs:
         shell: cmd
         run: |
           haxelib setup C:/haxelib
-          haxelib install hmm --quiet
-          haxelib run hmm install
+          haxelib install lime 7.9.0
+          haxelib install openfl 9.1.0
+          haxelib install flixel 4.11.0
+          haxelib install flixel-addons 2.11.0
+          haxelib install flixel-ui 2.4.0
+          haxelib install hscript 2.4.0
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
+          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
+          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
+          haxelib git hxNoise https://github.com/whuop/hxNoise
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
+          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
+          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
@@ -90,9 +116,22 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
-          haxelib setup ~/haxelib
-          haxelib install hmm --quiet
-          haxelib run hmm install
+          haxelib setup C:/haxelib
+          haxelib install lime 7.9.0
+          haxelib install openfl 9.1.0
+          haxelib install flixel 4.11.0
+          haxelib install flixel-addons 2.11.0
+          haxelib install flixel-ui 2.4.0
+          haxelib install hscript 2.4.0
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib git linc_luajit https://github.com/Leather128/linc_luajit.git
+          haxelib git flxanimate https://github.com/Vortex2Oblivion/flxanimate
+          haxelib git scriptless-polymod https://github.com/Vortex2Oblivion/scriptless-polymod
+          haxelib git hxNoise https://github.com/whuop/hxNoise
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git fnf-modcharting-tools https://github.com/Vortex2Oblivion/FNF-Modcharting-Tools
+          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
+          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
