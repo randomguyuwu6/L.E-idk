@@ -64,18 +64,14 @@ jobs:
 
   buildWindows:
     runs-on: windows-latest
-
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
-
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.6
       
-      # Runs a set of commands using the runners shell
       - name: Install Haxelib
-        shell: cmd
+        shell: bash
         run: |
           haxelib setup ~/haxelib
           haxelib install lime 8.1.3
@@ -96,13 +92,12 @@ jobs:
           haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
           haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio
           haxelib run lime setup -y
-      - name: Create Version Tag
-        run: echo "${{github.run_id}}" > VERSION
+
       - name: Compile
         shell: bash
         run: |
-          haxelib run lime setup -y
-          haxelib run lime build windows -release -D no-compilation
+          haxelib run lime build windows -release
+          
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
