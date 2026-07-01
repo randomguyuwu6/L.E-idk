@@ -108,6 +108,12 @@ jobs:
         with:
           name: windowsBuild
           path: export/release/windows/bin
+      - name: Force Haxelib
+        shell: bash
+        run: |
+          haxelib dev flixel /home/runner/haxelib/flixel/4,11,0
+          haxelib dev openfl /home/runner/haxelib/openfl/9,2,1
+          haxelib dev lime /home/runner/haxelib/lime/8,1,3
 
   buildMac:
     runs-on: macos-12
