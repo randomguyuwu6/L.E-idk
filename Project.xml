@@ -98,6 +98,7 @@
 	<haxelib name="fnf-modcharting-tools" unless="hl" />
 	<haxelib name="funkin.vis" />
 	<haxelib name="grig.audio" />
+	<source path="source" />
 
 	<!-- Haxedefines -->
 
