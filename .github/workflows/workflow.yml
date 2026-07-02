@@ -100,8 +100,9 @@ jobs:
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.sound.FlxSound;/import flixel.system.FlxSound;/g' {} +
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.addons.display.FlxRuntimeShader;/\/\/ import flixel.addons.display.FlxRuntimeShader;/g' {} +
           find source -name "*.hx" -type f -exec sed -i 's/import flixel.system.FlxShader;/\/\/ import flixel.system.FlxShader;/g' {} +
-          find ~/haxelib/fnf-modcharting-tools/git/source/modcharting/ -name "ModchartEditorState.hx" -type f -exec sed -i 's/import game.SoundGroup;//g' {} +
-          haxelib run lime build Project.xml windows -release
+          find ~/haxelib/fnf-modcharting-tools/git/source/modcharting/ -name "*.hx" -type f -exec sed -i 's/import game.SoundGroup;//g' {} +
+          find ~/haxelib/fnf-modcharting-tools/git/source/modcharting/ -name "*.hx" -type f -exec sed -i 's/import flixel.text.FlxInputText;//g' {} +
+          haxelib run lime build Project.xml windows -release -D no-compilation-server
           
       - name: Publish Artifact
         uses: actions/upload-artifact@main
