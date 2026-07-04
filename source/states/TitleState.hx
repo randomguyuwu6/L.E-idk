@@ -13,7 +13,6 @@ import utilities.PlayerSettings;
 import shaders.NoteColors;
 import modding.ModList;
 import game.Highscore;
-import utilities.PlayerSettings;
 import utilities.Options;
 import utilities.NoteVariables;
 import substates.OutdatedSubState;
@@ -73,11 +72,9 @@ class TitleState extends MusicBeatState {
 			FlxG.fixedTimestep = false;
 
 			NoteVariables.init();
-
 			Options.init();
 
 			LogStyle.ERROR.throwException = Options.getData("throwExceptionOnError");
-
 			FlxG.allowAntialiasing = FlxSprite.defaultAntialiasing = Options.getData("antialiasing");
 
 			PlayerSettings.init();
@@ -126,16 +123,12 @@ class TitleState extends MusicBeatState {
 
 			Application.current.onExit.add(function(exitCode) {
 				DiscordClient.shutdown();
-
 				#if linux
 				if (GamemodeClient.request_end() != 0) {
 					trace('Failed to request gamemode end: ${GamemodeClient.error_string()}...', ERROR);
 					System.exit(1);
-				} else {
-					trace('Succesfully requested gamemode to end...');
 				}
 				#end
-
 				for (key in Options.saves) {
 					key?.close();
 				}
@@ -180,7 +173,6 @@ class TitleState extends MusicBeatState {
 			Conductor.changeBPM(102);
 
 			var now:Date = Date.now();
-
 			if (((now.getDay() == 5 && now.getHours() >= 18) || Options.getData("nightMusic"))) {
 				Conductor.changeBPM(117);
 			}
@@ -259,25 +251,19 @@ class TitleState extends MusicBeatState {
 
 	public function getIntroTextShit():Array<Array<String>> {
 		var fullText:String = Assets.getText(Paths.txt('introText'));
-
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
-
 		for (i in firstArray) {
 			swagGoodArray.push(i.split('--'));
 		}
-
 		return swagGoodArray;
 	}
 
 	public var transitioning:Bool = false;
 
 	public override function update(elapsed:Float) {
-		if (controls.LEFT)
-			swagShader.hue -= elapsed * 0.1;
-
-		if (controls.RIGHT)
-			swagShader.hue += elapsed * 0.1;
+		if (controls.LEFT) swagShader.hue -= elapsed * 0.1;
+		if (controls.RIGHT) swagShader.hue += elapsed * 0.1;
 
 		#if MODDING_ALLOWED
 		if (FlxG.keys.justPressed.TAB && !transitioning) {
@@ -286,72 +272,28 @@ class TitleState extends MusicBeatState {
 		}
 		#end
 
-		if (FlxG.sound.music != null)
-			Conductor.songPosition = FlxG.sound.music.time;
-
-		if (FlxG.keys.justPressed.F)
-			FlxG.fullscreen = !FlxG.fullscreen;
+		if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
+		if (FlxG.keys.justPressed.F) FlxG.fullscreen = !FlxG.fullscreen;
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || FlxG.mouse.justPressed;
 
 		for (touch in FlxG.touches.list) {
-			if (touch.justPressed) {
-				pressedEnter = true;
-			}
+			if (touch.justPressed) pressedEnter = true;
 		}
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
 		if (gamepad != null) {
-			if (gamepad.justPressed.START)
-				pressedEnter = true;
+			if (gamepad.justPressed.START) pressedEnter = true;
 		}
 
 		if (pressedEnter && !transitioning && skippedIntro) {
-			if (titleText != null)
-				titleText.animation.play('press');
-
-			if (Options.getData("flashingLights"))
-				FlxG.camera.flash(FlxColor.WHITE, 1);
-
+			if (titleText != null) titleText.animation.play('press');
+			if (Options.getData("flashingLights")) FlxG.camera.flash(FlxColor.WHITE, 1);
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 			transitioning = true;
-
-			//call("checkForUpdate");
-			//#if CHECK_FOR_UPDATES
-			//if (Options.getData("checkForUpdates")) {
-				//trace("Checking for updates...");
-				//new FlxTimer().start(2, (tmr:FlxTimer) -> {
-					//var http:Http = new Http("https://raw.githubusercontent.com/Vortex2Oblivion/LeatherEngine/refs/heads/main/version.txt");
-					//http.onData = (data:String) -> {
-						//data = 'v' + data;
-						//if (CoolUtil.getCurrentVersion() != data) {
-							//trace('Outdated Version Detected! ' + data.trim() + ' != ' + CoolUtil.getCurrentVersion(), WARNING);
-							//Main.display.version += ' - UPDATE AVALIABLE (${data.trim()})';
-							//FlxG.switchState(() -> new OutdatedSubState(data.trim()));
-						//} else {
-							FlxG.switchState(() -> new MainMenuState());
-						}
-					}
-
-					http.onError = (error:String) -> {
-						trace(error, ERROR);
-						FlxG.switchState(() -> new MainMenuState()); // fail so we go anyway
-					}
-
-					http.request();
-				});
-			} else {
-				new FlxTimer().start(2, (tmr:FlxTimer) -> {
-					FlxG.switchState(() -> new MainMenuState());
-				});
-			}
-			#else
-			new FlxTimer().start(2, (tmr:FlxTimer) -> {
-				FlxG.switchState(() -> new MainMenuState());
-			});
-			#end
+			// Salto directo al menú sin lógica de actualización
+			FlxG.switchState(() -> new MainMenuState());
 		}
 
 		if (pressedEnter && !skippedIntro) {
@@ -392,15 +334,9 @@ class TitleState extends MusicBeatState {
 	}
 
 	public function textDataText(line:Int) {
-		if (titleTextData == null || line < 0) {
-			return;
-		}
-
+		if (titleTextData == null || line < 0) return;
 		var lineText:Null<String> = titleTextData[line];
-		if (lineText == null) {
-			return;
-		}
-
+		if (lineText == null) return;
 		if (lineText.contains("~")) {
 			createCoolText(lineText.split("~"));
 		} else {
@@ -412,59 +348,28 @@ class TitleState extends MusicBeatState {
 
 	override function beatHit() {
 		super.beatHit();
-
-		if (logoBl != null) {
-			logoBl.animation.play('bump');
-		}
+		if (logoBl != null) logoBl.animation.play('bump');
 		danceLeft = !danceLeft;
-
 		if (gfDance != null) {
-			if (danceLeft)
-				gfDance.animation.play('danceRight');
-			else
-				gfDance.animation.play('danceLeft');
+			if (danceLeft) gfDance.animation.play('danceRight');
+			else gfDance.animation.play('danceLeft');
 		}
-
-		if (skippedIntro) {
-			return;
-		}
+		if (skippedIntro) return;
 
 		switch (curBeat) {
-			case 1:
-				textDataText(0);
-			case 3:
-				textDataText(1);
-			case 4:
-				deleteCoolText();
-			case 5:
-				textDataText(2);
-			case 7:
-				textDataText(3);
-				if (newgrounds != null)
-					newgrounds.visible = true;
-			case 8:
-				deleteCoolText();
-				if (newgrounds != null)
-					newgrounds.visible = false;
-			case 9:
-				if (curWacky[0] != null) {
-					createCoolText([curWacky[0]]);
-				}
-			case 11:
-				if (curWacky[1] != null) {
-					addMoreText(curWacky[1]);
-				}
-			case 12:
-				deleteCoolText();
-			// yipee
-			case 13 | 14 | 15:
-				textDataText(curBeat - 9);
-			case 16:
-				skipIntro();
+			case 1: textDataText(0);
+			case 3: textDataText(1);
+			case 4: deleteCoolText();
+			case 5: textDataText(2);
+			case 7: textDataText(3); if (newgrounds != null) newgrounds.visible = true;
+			case 8: deleteCoolText(); if (newgrounds != null) newgrounds.visible = false;
+			case 9: if (curWacky[0] != null) createCoolText([curWacky[0]]);
+			case 11: if (curWacky[1] != null) addMoreText(curWacky[1]);
+			case 12: deleteCoolText();
+			case 13 | 14 | 15: textDataText(curBeat - 9);
+			case 16: skipIntro();
 		}
-
 		MusicBeatState.windowNameSuffix = skippedIntro ? "" : " " + Std.string(FlxMath.bound(16 - curBeat, 1, 15));
-
 		call("beatHit");
 	}
 
@@ -474,10 +379,7 @@ class TitleState extends MusicBeatState {
 		call("skipIntro");
 		if (!skippedIntro) {
 			MusicBeatState.windowNameSuffix = "";
-
-			if (Options.getData("flashingLights"))
-				FlxG.camera.flash(FlxColor.WHITE, 4);
-
+			if (Options.getData("flashingLights")) FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(newgrounds);
 			remove(credGroup);
 			skippedIntro = true;
