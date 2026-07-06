@@ -299,26 +299,28 @@ class TitleState extends MusicBeatState {
 			skipIntro();
 		}
 
-		// === AQUÍ COLOCAS EL TRUCO DE LAS FLECHAS ===
-		if (FlxG.keys.pressed.LEFT) logoBl.x -= 2;
-		if (FlxG.keys.pressed.RIGHT) logoBl.x += 2;
-		if (FlxG.keys.pressed.UP) logoBl.y -= 2;
-		if (FlxG.keys.pressed.DOWN) logoBl.y += 2;
+		// MOVER Y ESCALAR (Esto lo hacés en tu PC con el juego descargado)
+if (FlxG.keys.pressed.LEFT) logoBl.x -= 2;
+if (FlxG.keys.pressed.RIGHT) logoBl.x += 2;
+if (FlxG.keys.pressed.UP) logoBl.y -= 2;
+if (FlxG.keys.pressed.DOWN) logoBl.y += 2;
+if (FlxG.keys.pressed.A) { logoBl.scale.x -= 0.01; logoBl.scale.y -= 0.01; logoBl.updateHitbox(); }
+if (FlxG.keys.pressed.S) { logoBl.scale.x += 0.01; logoBl.scale.y += 0.01; logoBl.updateHitbox(); }
 
-		if (FlxG.keys.pressed.A) {
-			logoBl.scale.x -= 0.01;
-			logoBl.scale.y -= 0.01;
-			logoBl.updateHitbox();
-		}
-		if (FlxG.keys.pressed.S) {
-			logoBl.scale.x += 0.01;
-			logoBl.scale.y += 0.01;
-			logoBl.updateHitbox();
-		}
-
-		if (FlxG.keys.justPressed.SPACE) {
-			trace("X: " + logoBl.x + " | Y: " + logoBl.y + " | Scale: " + logoBl.scale.x);
-		}
+// AL TOCAR ESPACIO SE GENERA EL ARCHIVO DE TEXTO
+if (FlxG.keys.justPressed.SPACE) {
+    var linea1 = "logoBl.x = " + logoBl.x + ";\n";
+    var linea2 = "logoBl.y = " + logoBl.y + ";\n";
+    var linea3 = "logoBl.scale.set(" + logoBl.scale.x + ", " + logoBl.scale.y + ");\n";
+    var linea4 = "logoBl.updateHitbox();";
+    
+    var textoCompleto = linea1 + linea2 + linea3 + linea4;
+    
+    // Guarda el archivo de texto en la carpeta del juego
+    #if sys
+    sys.io.File.saveContent("coordenadas_logo.txt", textoCompleto);
+    #end
+}
 
 		super.update(elapsed);
 		call("update", [elapsed]);
