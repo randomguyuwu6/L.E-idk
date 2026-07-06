@@ -206,8 +206,9 @@ class TitleState extends MusicBeatState {
 		logoBl.scale.set(0.52, 0.52);
 		logoBl.updateHitbox();
 		logoBl.screenCenter(X);
+		logoBl.x -= 50;
 		logoBl.y = 20;
-
+		
 		logoBl.shader = swagShader.shader;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
