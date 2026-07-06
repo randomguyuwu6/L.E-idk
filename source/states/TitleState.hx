@@ -206,8 +206,8 @@ class TitleState extends MusicBeatState {
 		logoBl.scale.set(0.52, 0.52);
 		logoBl.updateHitbox();
 		logoBl.screenCenter(X);
-		logoBl.x -= 50;
-		logoBl.y = 20;
+		logoBl.x -= 280;
+		logoBl.y = 50;
 		
 		logoBl.shader = swagShader.shader;
 
