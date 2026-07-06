@@ -269,27 +269,6 @@ class TitleState extends MusicBeatState {
 		if (FlxG.keys.justPressed.TAB && !transitioning) {
 			openSubState(new modding.SwitchModSubstate());
 			persistentUpdate = false;
-
-			if (FlxG.keys.pressed.LEFT) logoBl.x -= 2;
-            if (FlxG.keys.pressed.RIGHT) logoBl.x += 2;
-            if (FlxG.keys.pressed.UP) logoBl.y -= 2;
-            if (FlxG.keys.pressed.DOWN) logoBl.y += 2;
-
-// ESCALAR EL LOGO CON LAS TECLAS A y S
-            if (FlxG.keys.pressed.A) {
-    logoBl.scale.x -= 0.01;
-    logoBl.scale.y -= 0.01;
-    logoBl.updateHitbox();
-}
-            if (FlxG.keys.pressed.S) {
-    logoBl.scale.x += 0.01;
-    logoBl.scale.y += 0.01;
-    logoBl.updateHitbox();
-}
-
-// MOSTRAR LOS VALORES EN LA CONSOLA AL PRESIONAR ESPACIO
-if (FlxG.keys.justPressed.SPACE) {
-    trace("X: " + logoBl.x + " | Y: " + logoBl.y + " | Scale: " + logoBl.scale.x);
 }
 		#end
 
@@ -313,12 +292,32 @@ if (FlxG.keys.justPressed.SPACE) {
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 			transitioning = true;
-			// Salto directo al menú sin lógica de actualización
 			FlxG.switchState(() -> new MainMenuState());
 		}
 
 		if (pressedEnter && !skippedIntro) {
 			skipIntro();
+		}
+
+		// === AQUÍ COLOCAS EL TRUCO DE LAS FLECHAS ===
+		if (FlxG.keys.pressed.LEFT) logoBl.x -= 2;
+		if (FlxG.keys.pressed.RIGHT) logoBl.x += 2;
+		if (FlxG.keys.pressed.UP) logoBl.y -= 2;
+		if (FlxG.keys.pressed.DOWN) logoBl.y += 2;
+
+		if (FlxG.keys.pressed.A) {
+			logoBl.scale.x -= 0.01;
+			logoBl.scale.y -= 0.01;
+			logoBl.updateHitbox();
+		}
+		if (FlxG.keys.pressed.S) {
+			logoBl.scale.x += 0.01;
+			logoBl.scale.y += 0.01;
+			logoBl.updateHitbox();
+		}
+
+		if (FlxG.keys.justPressed.SPACE) {
+			trace("X: " + logoBl.x + " | Y: " + logoBl.y + " | Scale: " + logoBl.scale.x);
 		}
 
 		super.update(elapsed);
@@ -388,7 +387,7 @@ if (FlxG.keys.justPressed.SPACE) {
 			case 11: if (curWacky[1] != null) addMoreText(curWacky[1]);
 			case 12: deleteCoolText();
 			case 13 | 14 | 15: textDataText(curBeat - 9);
-			case 16: skipIntro();
+			case 16: 
 		}
 		MusicBeatState.windowNameSuffix = skippedIntro ? "" : " " + Std.string(FlxMath.bound(16 - curBeat, 1, 15));
 		call("beatHit");
