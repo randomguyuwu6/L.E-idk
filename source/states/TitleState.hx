@@ -202,10 +202,13 @@ class TitleState extends MusicBeatState {
 		logoBl.frames = Paths.getSparrowAtlas('title/logoBumpin');
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
-		logoBl.updateHitbox();
-		logoBl.shader = swagShader.shader;
 
-		logoBl.scale.set(0.56, 0.56);
+		logoBl.scale.set(0.52, 0.52);
+		logoBl.updateHitbox();
+		logoBl.screenCenter(X);
+		logoBl.y = 20;
+
+		logoBl.shader = swagShader.shader;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('title/gfDanceTitle');
