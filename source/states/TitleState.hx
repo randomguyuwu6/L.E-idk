@@ -194,7 +194,7 @@ class TitleState extends MusicBeatState {
 			playTitleMusic();
 		}
 
-		version = '${Application.current.meta.get('name')} ${CoolUtil.getCurrentVersion()}';
+		version = 'ValenSmash Difficulty Collection Definitive Edition (Custom Build) ${CoolUtil.getCurrentVersion()}';
 
 		call("createTitleAssets");
 
