@@ -205,6 +205,8 @@ class TitleState extends MusicBeatState {
 		logoBl.updateHitbox();
 		logoBl.shader = swagShader.shader;
 
+		logoBl.scale.set(0.56, 0.56);
+
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('title/gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
@@ -269,7 +271,7 @@ class TitleState extends MusicBeatState {
 		if (FlxG.keys.justPressed.TAB && !transitioning) {
 			openSubState(new modding.SwitchModSubstate());
 			persistentUpdate = false;
-}
+		}
 		#end
 
 		if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
@@ -298,29 +300,6 @@ class TitleState extends MusicBeatState {
 		if (pressedEnter && !skippedIntro) {
 			skipIntro();
 		}
-
-		// MOVER Y ESCALAR (Esto lo hacés en tu PC con el juego descargado)
-if (FlxG.keys.pressed.LEFT) logoBl.x -= 2;
-if (FlxG.keys.pressed.RIGHT) logoBl.x += 2;
-if (FlxG.keys.pressed.UP) logoBl.y -= 2;
-if (FlxG.keys.pressed.DOWN) logoBl.y += 2;
-if (FlxG.keys.pressed.A) { logoBl.scale.x -= 0.01; logoBl.scale.y -= 0.01; logoBl.updateHitbox(); }
-if (FlxG.keys.pressed.S) { logoBl.scale.x += 0.01; logoBl.scale.y += 0.01; logoBl.updateHitbox(); }
-
-// AL TOCAR ESPACIO SE GENERA EL ARCHIVO DE TEXTO
-if (FlxG.keys.justPressed.SPACE) {
-    var linea1 = "logoBl.x = " + logoBl.x + ";\n";
-    var linea2 = "logoBl.y = " + logoBl.y + ";\n";
-    var linea3 = "logoBl.scale.set(" + logoBl.scale.x + ", " + logoBl.scale.y + ");\n";
-    var linea4 = "logoBl.updateHitbox();";
-    
-    var textoCompleto = linea1 + linea2 + linea3 + linea4;
-    
-    // Guarda el archivo de texto en la carpeta del juego
-    #if sys
-    sys.io.File.saveContent("coordenadas_logo.txt", textoCompleto);
-    #end
-}
 
 		super.update(elapsed);
 		call("update", [elapsed]);
@@ -389,7 +368,7 @@ if (FlxG.keys.justPressed.SPACE) {
 			case 11: if (curWacky[1] != null) addMoreText(curWacky[1]);
 			case 12: deleteCoolText();
 			case 13 | 14 | 15: textDataText(curBeat - 9);
-			case 16: 
+			case 16: skipIntro();
 		}
 		MusicBeatState.windowNameSuffix = skippedIntro ? "" : " " + Std.string(FlxMath.bound(16 - curBeat, 1, 15));
 		call("beatHit");
