@@ -269,7 +269,28 @@ class TitleState extends MusicBeatState {
 		if (FlxG.keys.justPressed.TAB && !transitioning) {
 			openSubState(new modding.SwitchModSubstate());
 			persistentUpdate = false;
-		}
+
+			if (FlxG.keys.pressed.LEFT) logoBl.x -= 2;
+            if (FlxG.keys.pressed.RIGHT) logoBl.x += 2;
+            if (FlxG.keys.pressed.UP) logoBl.y -= 2;
+            if (FlxG.keys.pressed.DOWN) logoBl.y += 2;
+
+// ESCALAR EL LOGO CON LAS TECLAS A y S
+            if (FlxG.keys.pressed.A) {
+    logoBl.scale.x -= 0.01;
+    logoBl.scale.y -= 0.01;
+    logoBl.updateHitbox();
+}
+            if (FlxG.keys.pressed.S) {
+    logoBl.scale.x += 0.01;
+    logoBl.scale.y += 0.01;
+    logoBl.updateHitbox();
+}
+
+// MOSTRAR LOS VALORES EN LA CONSOLA AL PRESIONAR ESPACIO
+if (FlxG.keys.justPressed.SPACE) {
+    trace("X: " + logoBl.x + " | Y: " + logoBl.y + " | Scale: " + logoBl.scale.x);
+}
 		#end
 
 		if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
