@@ -115,10 +115,48 @@ class FreeplayState extends MusicBeatState {
 		if (FlxG.sound.music == null || !FlxG.sound.music.playing)
 			TitleState.playTitleMusic();
 
-		var path:String = #if MODDING_ALLOWED 'mods/${Options.getData("curMod")}/data/freeplay.json'; #else 'assets/data/freeplay.json'; #end
-		if (FileSystem.exists(path)) {
-			songs = cast Json.parse(File.getContent(path)).songs;
+		var initSonglist:Array<String> = [];
+var pathTxt:String = #if MODDING_ALLOWED 'mods/${Options.getData("curMod")}/data/freeplaySonglist.txt'; #else 'assets/data/freeplaySonglist.txt'; #end
+
+if (FileSystem.exists(pathTxt)) {
+	// Reutiliza el método del motor para limpiar espacios y saltos de línea del archivo de texto
+	initSonglist = CoolUtil.coolTextFileSys(pathTxt);
+}
+
+for (i in 0...initSonglist.length) {
+	if (initSonglist[i].trim() != "") {
+		var listArray = initSonglist[i].split(":");
+
+		// Mapear los datos según las posiciones clásicas del .txt
+		var songName:String = listArray[0] != null ? listArray[0].trim() : "Test";
+		var icon:String = listArray[1] != null ? listArray[1].trim() : "bf";
+		var week:Int = listArray[2] != null ? Std.parseInt(listArray[2].trim()) : 0;
+		
+		// Dificultades por defecto
+		var diffs:Array<String> = ["easy", "normal", "hard"];
+		if (listArray[3] != null && listArray[3].trim() != "") {
+			diffs = listArray[3].split(",");
+			for (j in 0...diffs.length) diffs[j] = diffs[j].trim();
 		}
+
+		// Color Hexadecimal
+		var colorStr:String = listArray[4] != null ? listArray[4].trim() : "#ffffff";
+
+		// Construimos el objeto simulando la estructura esperada por FreeplaySong de la 1.1.9
+		var newsong:FreeplaySong = cast {
+			name: songName,
+			icon: icon,
+			color: colorStr,
+			week: week,
+			difficulties: diffs,
+			menuConfig: { showStats: true, canBeEntered: true },
+			metadata: { composer: "", charter: "", modcharter: "" },
+			extraData: {}
+		};
+
+		songs.push(newsong);
+	}
+}
 
 		if (curSelected > songs.length)
 			curSelected = 0;
