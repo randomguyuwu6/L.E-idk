@@ -119,7 +119,7 @@ class FreeplayState extends MusicBeatState {
 var pathTxt:String = #if MODDING_ALLOWED 'mods/${Options.getData("curMod")}/data/freeplaySonglist.txt'; #else 'assets/data/freeplaySonglist.txt'; #end
 
 if (FileSystem.exists(pathTxt)) {
-	// Reutiliza el método del motor para limpiar espacios y saltos de línea del archivo de texto
+	
 	initSonglist = CoolUtil.coolTextFileSys(pathTxt);
 }
 
@@ -127,22 +127,18 @@ for (i in 0...initSonglist.length) {
 	if (initSonglist[i].trim() != "") {
 		var listArray = initSonglist[i].split(":");
 
-		// Mapear los datos según las posiciones clásicas del .txt
 		var songName:String = listArray[0] != null ? listArray[0].trim() : "Test";
 		var icon:String = listArray[1] != null ? listArray[1].trim() : "bf";
 		var week:Int = listArray[2] != null ? Std.parseInt(listArray[2].trim()) : 0;
 		
-		// Dificultades por defecto
 		var diffs:Array<String> = ["easy", "normal", "hard"];
 		if (listArray[3] != null && listArray[3].trim() != "") {
 			diffs = listArray[3].split(",");
 			for (j in 0...diffs.length) diffs[j] = diffs[j].trim();
 		}
 
-		// Color Hexadecimal
 		var colorStr:String = listArray[4] != null ? listArray[4].trim() : "#ffffff";
 
-		// Construimos el objeto simulando la estructura esperada por FreeplaySong de la 1.1.9
 		var newsong:FreeplaySong = cast {
 			name: songName,
 			icon: icon,
