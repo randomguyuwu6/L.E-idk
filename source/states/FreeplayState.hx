@@ -116,16 +116,42 @@ class FreeplayState extends MusicBeatState {
 			TitleState.playTitleMusic();
 
 		var initSonglist:Array<String> = [];
-var pathTxt:String = #if MODDING_ALLOWED 'mods/${Options.getData("curMod")}/data/freeplaySonglist.txt'; #else 'assets/data/freeplaySonglist.txt'; #end
+var curMod:String = Options.getData("curMod");
 
-if (FileSystem.exists(pathTxt)) {
-	
-	initSonglist = CoolUtil.coolTextFileSys(pathTxt);
+var pathTxt:String = 'assets/data/freeplaySonglist.txt';
+
+#if MODDING_ALLOWED
+
+if (sys.FileSystem.exists('mods/$curMod/_append/data/freeplaySonglist.txt')) {
+	pathTxt = 'mods/$curMod/_append/data/freeplaySonglist.txt';
+} else if (sys.FileSystem.exists('mods/$curMod/_append/data/freeplaysonglist.txt')) {
+	pathTxt = 'mods/$curMod/_append/data/freeplaysonglist.txt';
+} 
+
+else if (sys.FileSystem.exists('mods/$curMod/data/freeplaySonglist.txt')) {
+	pathTxt = 'mods/$curMod/data/freeplaySonglist.txt';
+} else if (sys.FileSystem.exists('mods/$curMod/data/freeplaysonglist.txt')) {
+	pathTxt = 'mods/$curMod/data/freeplaysonglist.txt';
+}
+#end
+
+
+if (!sys.FileSystem.exists(pathTxt) && sys.FileSystem.exists('assets/data/freeplaysonglist.txt')) {
+	pathTxt = 'assets/data/freeplaysonglist.txt';
+}
+
+
+if (sys.FileSystem.exists(pathTxt)) {
+	var contenido:String = sys.io.File.getContent(pathTxt);
+	initSonglist = contenido.trim().split('\n');
+} else {
+	trace("¡ALERTA! El motor no pudo encontrar el archivo .txt en ninguna de las rutas.");
 }
 
 for (i in 0...initSonglist.length) {
-	if (initSonglist[i].trim() != "") {
-		var listArray = initSonglist[i].split(":");
+	var linea:String = initSonglist[i].trim();
+	if (linea != "" && !linea.startsWith('#')) {
+		var listArray = linea.split(":");
 
 		var songName:String = listArray[0] != null ? listArray[0].trim() : "Test";
 		var icon:String = listArray[1] != null ? listArray[1].trim() : "bf";
