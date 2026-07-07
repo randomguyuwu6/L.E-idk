@@ -203,10 +203,10 @@ class TitleState extends MusicBeatState {
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
 
-		logoBl.scale.set(0.52, 0.52);
+		logoBl.scale.set(0.6, 0.6);
 		logoBl.updateHitbox();
-		logoBl.screenCenter(X);
-		logoBl.x -= 280;
+		logoBl.screenCenter(X); 
+		logoBl.x -= 310;
 		logoBl.y = 50;
 		
 		logoBl.shader = swagShader.shader;
