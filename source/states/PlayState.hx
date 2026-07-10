@@ -3682,18 +3682,25 @@ class PlayState extends MusicBeatState {
     if (seconds < 0)
         seconds = 0;
 
+    if (untyped __js__("window.hasDied == null")) untyped __js__("window.hasDied = false");
+
     var botSuffix:String = (Options.getData("botplay") ? " (BOT)" : "");
-    var noDeathSuffix:String = "";
+    var noDeathSuffix:String = " (NO DEATH)";
 
     if (Options.getData("noDeath")) {
-        noDeathSuffix = (health <= 0) ? " (DEAD)" : " (NO DEATH)";
+        if (health <= 0) untyped __js__("window.hasDied = true");
+        
+        if (untyped __js__("window.hasDied")) {
+            noDeathSuffix = " (DEAD)";
+        }
+    } else {
+        untyped __js__("window.hasDied = false");
     }
 
     var suffix:String = botSuffix + noDeathSuffix;
-    // -----------------------------
 
     switch (timeBarStyle.toLowerCase()) {
-        default: // includes 'leather engine'
+        default:
             timeBar.text.text = SONG.song + " ~ " + storyDifficultyStr + ' (${FlxStringUtil.formatTime(seconds, false)})$suffix';
         case "psych engine":
             timeBar.text.text = '${FlxStringUtil.formatTime(seconds, false)}$suffix';
