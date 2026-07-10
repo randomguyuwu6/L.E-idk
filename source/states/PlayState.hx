@@ -3675,6 +3675,8 @@ class PlayState extends MusicBeatState {
 	}
 
 	function updateSongInfoText() {
+    @:privateAccess if (PlayState.alreadyDiedVisual == null) PlayState.alreadyDiedVisual = false;
+
     var songThingy:Float = songLength - FlxG.sound.music.time;
 
     var seconds:Int = Math.floor(songThingy / 1000);
@@ -3682,19 +3684,19 @@ class PlayState extends MusicBeatState {
     if (seconds < 0)
         seconds = 0;
 
-    if (untyped __js__("window.hasDied == null")) untyped __js__("window.hasDied = false");
-
     var botSuffix:String = (Options.getData("botplay") ? " (BOT)" : "");
     var noDeathSuffix:String = " (NO DEATH)";
 
     if (Options.getData("noDeath")) {
-        if (health <= 0) untyped __js__("window.hasDied = true");
-        
-        if (untyped __js__("window.hasDied")) {
+        if (health <= 0) {
+            PlayState.alreadyDiedVisual = true;
+        }
+
+        if (PlayState.alreadyDiedVisual) {
             noDeathSuffix = " (DEAD)";
         }
     } else {
-        untyped __js__("window.hasDied = false");
+        PlayState.alreadyDiedVisual = false;
     }
 
     var suffix:String = botSuffix + noDeathSuffix;
