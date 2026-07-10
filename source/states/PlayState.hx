@@ -3675,26 +3675,34 @@ class PlayState extends MusicBeatState {
 	}
 
 	function updateSongInfoText() {
-		var songThingy:Float = songLength - FlxG.sound.music.time;
+    var songThingy:Float = songLength - FlxG.sound.music.time;
 
-		var seconds:Int = Math.floor(songThingy / 1000);
-		seconds = Std.int(seconds / songMultiplier);
-		if (seconds < 0)
-			seconds = 0;
+    var seconds:Int = Math.floor(songThingy / 1000);
+    seconds = Std.int(seconds / songMultiplier);
+    if (seconds < 0)
+        seconds = 0;
 
-		var suffix:String = (Options.getData("botplay") ? " (BOT)" : "") + (Options.getData("noDeath") ? " (NO DEATH)" : "");
+    var botSuffix:String = (Options.getData("botplay") ? " (BOT)" : "");
+    var noDeathSuffix:String = "";
 
-		switch (timeBarStyle.toLowerCase()) {
-			default: // includes 'leather engine'
-				timeBar.text.text = SONG.song + " ~ " + storyDifficultyStr + ' (${FlxStringUtil.formatTime(seconds, false)})$suffix';
-			case "psych engine":
-				timeBar.text.text = '${FlxStringUtil.formatTime(seconds, false)}$suffix';
-			case "old kade engine":
-				timeBar.text.text = SONG.song + suffix;
-		}
-		timeBar.text.screenCenter(X);
-	}
+    if (Options.getData("noDeath")) {
+        noDeathSuffix = (health <= 0) ? " (DEAD)" : " (NO DEATH)";
+    }
 
+    var suffix:String = botSuffix + noDeathSuffix;
+    // -----------------------------
+
+    switch (timeBarStyle.toLowerCase()) {
+        default: // includes 'leather engine'
+            timeBar.text.text = SONG.song + " ~ " + storyDifficultyStr + ' (${FlxStringUtil.formatTime(seconds, false)})$suffix';
+        case "psych engine":
+            timeBar.text.text = '${FlxStringUtil.formatTime(seconds, false)}$suffix';
+        case "old kade engine":
+            timeBar.text.text = SONG.song + suffix;
+    }
+    timeBar.text.screenCenter(X);
+}
+			
 	inline function set(name:String, data:Any, ?executeOn:ExecuteOn = BOTH) {
 		for (script in scripts) {
 			if (script.executeOn == executeOn || executeOn == BOTH) {
