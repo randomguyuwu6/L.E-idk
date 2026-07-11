@@ -1020,6 +1020,7 @@ class PlayState extends MusicBeatState {
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		hasDied = false;
 
 		startingSong = true;
 
