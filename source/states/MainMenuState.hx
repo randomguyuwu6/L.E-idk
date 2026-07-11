@@ -83,7 +83,7 @@ class MainMenuState extends MusicBeatState {
 
 		persistentUpdate = persistentDraw = true;
 
-		bg = new FlxSprite(-80).makeBackground(0xFFFDE871);
+		bg = new FlxSprite(-80).makeBackground(0xFFFFFFFF);
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.18;
 		bg.scale.set(1.3, 1.3);
