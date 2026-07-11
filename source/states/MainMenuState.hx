@@ -94,7 +94,7 @@ class MainMenuState extends MusicBeatState {
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).makeBackground(0xFFfd719b);
+		magenta = new FlxSprite(-80).makeBackground(0xFF520029);
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.18;
 		magenta.scale.set(1.3, 1.3);
