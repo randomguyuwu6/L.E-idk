@@ -234,7 +234,7 @@ class MainMenuState extends MusicBeatState {
 			#end
 
 			case 'toolbox':
-				FlxG.switchState(() -> new toolbox.ToolboxState("Categories", 0xFF00FF6A));
+				FlxG.switchState(() -> new toolbox.ToolboxState("Categories", 0xFF610ECE));
 		}
 		call("buttonSelectedPost", [selectedButton]);
 	}
