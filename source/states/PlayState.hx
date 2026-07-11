@@ -89,6 +89,11 @@ class PlayState extends MusicBeatState {
 	static var SONG:SongData;
 
 	/**
+		Variable for the DEAD visual
+	**/
+	static var hasDied:Bool = false;
+
+	/**
 		`Bool` for whether we are currently in Story Mode.
 	**/
 	static var isStoryMode:Bool = false;
@@ -3675,43 +3680,41 @@ class PlayState extends MusicBeatState {
 	}
 
 	function updateSongInfoText() {
-    @:privateAccess if (PlayState.alreadyDiedVisual == null) PlayState.alreadyDiedVisual = false;
+	var songThingy:Float = songLength - FlxG.sound.music.time;
 
-    var songThingy:Float = songLength - FlxG.sound.music.time;
+	var seconds:Int = Math.floor(songThingy / 1000);
+	seconds = Std.int(seconds / songMultiplier);
+	if (seconds < 0)
+		seconds = 0;
 
-    var seconds:Int = Math.floor(songThingy / 1000);
-    seconds = Std.int(seconds / songMultiplier);
-    if (seconds < 0)
-        seconds = 0;
+	var botSuffix:String = (Options.getData("botplay") ? " (BOT)" : "");
+	var noDeathSuffix:String = "";
 
-    var botSuffix:String = (Options.getData("botplay") ? " (BOT)" : "");
-    var noDeathSuffix:String = " (NO DEATH)";
+	if (Options.getData("noDeath")) {
 
-    if (Options.getData("noDeath")) {
-        if (health <= 0) {
-            PlayState.alreadyDiedVisual = true;
-        }
+		if (health <= 0) {
+			hasDied = true;
+		}
+		
+		noDeathSuffix = (hasDied ? " (DEAD)" : " (NO DEATH)");
+	} else {
 
-        if (PlayState.alreadyDiedVisual) {
-            noDeathSuffix = " (DEAD)";
-        }
-    } else {
-        PlayState.alreadyDiedVisual = false;
-    }
+		hasDied = false;
+	}
 
-    var suffix:String = botSuffix + noDeathSuffix;
+	var suffix:String = botSuffix + noDeathSuffix;
 
-    switch (timeBarStyle.toLowerCase()) {
-        default:
-            timeBar.text.text = SONG.song + " ~ " + storyDifficultyStr + ' (${FlxStringUtil.formatTime(seconds, false)})$suffix';
-        case "psych engine":
-            timeBar.text.text = '${FlxStringUtil.formatTime(seconds, false)}$suffix';
-        case "old kade engine":
-            timeBar.text.text = SONG.song + suffix;
-    }
-    timeBar.text.screenCenter(X);
+	switch (timeBarStyle.toLowerCase()) {
+		default: // includes 'leather engine'
+			timeBar.text.text = SONG.song + " ~ " + storyDifficultyStr + ' (${FlxStringUtil.formatTime(seconds, false)})$suffix';
+		case "psych engine":
+			timeBar.text.text = '${FlxStringUtil.formatTime(seconds, false)}$suffix';
+		case "old kade engine":
+			timeBar.text.text = SONG.song + suffix;
+	}
+	timeBar.text.screenCenter(X);
 }
-			
+
 	inline function set(name:String, data:Any, ?executeOn:ExecuteOn = BOTH) {
 		for (script in scripts) {
 			if (script.executeOn == executeOn || executeOn == BOTH) {
