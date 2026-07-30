@@ -273,19 +273,19 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 
     if (inEditor) {
         frames = null;
-        makeGraphic(16, 40, flixel.util.FlxColor.WHITE);
+        makeGraphic(28, 42, flixel.util.FlxColor.WHITE);
         updateHitbox();
         antialiasing = false;
 
         if (prevNote.isSustainNote) {
             prevNote.frames = null;
-            prevNote.makeGraphic(16, 40, flixel.util.FlxColor.WHITE);
+            prevNote.makeGraphic(28, 42, flixel.util.FlxColor.WHITE);
 
             var speed = song.speed;
             if (utilities.Options.getData("useCustomScrollSpeed"))
                 speed = utilities.Options.getData("customScrollSpeed") / PlayState.songMultiplier;
 
-            prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * speed;
+            prevNote.scale.y *= (Conductor.stepCrochet / 100) * 2.0 * speed;
             prevNote.updateHitbox();
             prevNote.antialiasing = false;
         }
