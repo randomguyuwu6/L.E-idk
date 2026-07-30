@@ -273,7 +273,11 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 
 			if (inEditor) {
 				frames = null;
-				makeGraphic(8, 44, flixel.util.FlxColor.WHITE);
+				
+				var length:Float = sustainLength;
+				if (length < 10) length = 15;
+				
+				makeGraphic(8, Std.int(length * 0.45), flixel.util.FlxColor.WHITE);
 				updateHitbox();
 				centerOffsets();
 				antialiasing = false;
