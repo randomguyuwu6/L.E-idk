@@ -266,30 +266,48 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 			flipY = true;
 
 		if (isSustainNote && prevNote != null) {
-			alpha = 0.6;
+    alpha = 0.6;
 
-			prevNoteStrumtime = prevNote.strumTime;
-			prevNoteIsSustainNote = prevNote.isSustainNote;
+    prevNoteStrumtime = prevNote.strumTime;
+    prevNoteIsSustainNote = prevNote.isSustainNote;
 
-			if (!inEditor) {
-				animation.play("holdend");
+    if (inEditor) {
+        frames = null;
+        makeGraphic(16, 40, flixel.util.FlxColor.WHITE);
+        updateHitbox();
+        antialiasing = false;
 
-				if (prevNote.isSustainNote) {
-					if (prevNote.animation != null)
-						prevNote.animation.play("hold");
+        if (prevNote.isSustainNote) {
+            prevNote.frames = null;
+            prevNote.makeGraphic(16, 40, flixel.util.FlxColor.WHITE);
 
-					prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
-					prevNote.updateHitbox();
-					prevNote.centerOffsets();
-					prevNote.sustainScaleY = prevNote.scale.y;
-				}
+            var speed = song.speed;
+            if (utilities.Options.getData("useCustomScrollSpeed"))
+                speed = utilities.Options.getData("customScrollSpeed") / PlayState.songMultiplier;
 
-				updateHitbox();
-				centerOffsets();
+            prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * speed;
+            prevNote.updateHitbox();
+            prevNote.antialiasing = false;
+        }
+    } else {
+        animation.play("holdend");
 
-				sustainScaleY = scale.y;
-			}
-		}
+        if (prevNote.isSustainNote) {
+            if (prevNote.animation != null)
+                prevNote.animation.play("hold");
+
+            prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
+            prevNote.updateHitbox();
+            prevNote.centerOffsets();
+            prevNote.sustainScaleY = prevNote.scale.y;
+        }
+
+        updateHitbox();
+        centerOffsets();
+
+        sustainScaleY = scale.y;
+    }
+}
 
 		if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] != null) {
 			if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] == "true")
