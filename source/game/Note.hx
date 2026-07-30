@@ -281,15 +281,11 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 			prevNote.frames = null;
 			prevNote.makeGraphic(30, 40, flixel.util.FlxColor.WHITE);
 
-			var speed = song.speed;
-			if (utilities.Options.getData("useCustomScrollSpeed"))
-				speed = utilities.Options.getData("customScrollSpeed") / PlayState.songMultiplier;
-
-			prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * speed;
+			prevNote.scale.y = 1.0;
 			prevNote.updateHitbox();
 			prevNote.antialiasing = false;
 			
-			prevNote.y -= 10;
+			prevNote.y -= 9;
 		}
 	} else {
 		animation.play("holdend");
