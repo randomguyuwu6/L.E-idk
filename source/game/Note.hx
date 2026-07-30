@@ -266,47 +266,47 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 			flipY = true;
 
 		if (isSustainNote && prevNote != null) {
-    alpha = 0.6;
+	alpha = 0.6;
 
-    prevNoteStrumtime = prevNote.strumTime;
-    prevNoteIsSustainNote = prevNote.isSustainNote;
+	prevNoteStrumtime = prevNote.strumTime;
+	prevNoteIsSustainNote = prevNote.isSustainNote;
 
-    if (inEditor) {
-        frames = null;
-        makeGraphic(28, 42, flixel.util.FlxColor.WHITE);
-        updateHitbox();
-        antialiasing = false;
+	if (inEditor) {
+		frames = null;
+		makeGraphic(28, 45, flixel.util.FlxColor.WHITE);
+		updateHitbox();
+		antialiasing = false;
 
-        if (prevNote.isSustainNote) {
-            prevNote.frames = null;
-            prevNote.makeGraphic(28, 42, flixel.util.FlxColor.WHITE);
+		if (prevNote.isSustainNote) {
+			prevNote.frames = null;
+			prevNote.makeGraphic(28, 45, flixel.util.FlxColor.WHITE);
 
-            var speed = song.speed;
-            if (utilities.Options.getData("useCustomScrollSpeed"))
-                speed = utilities.Options.getData("customScrollSpeed") / PlayState.songMultiplier;
+			var speed = song.speed;
+			if (utilities.Options.getData("useCustomScrollSpeed"))
+				speed = utilities.Options.getData("customScrollSpeed") / PlayState.songMultiplier;
 
-            prevNote.scale.y *= (Conductor.stepCrochet / 100) * 2.0 * speed;
-            prevNote.updateHitbox();
-            prevNote.antialiasing = false;
-        }
-    } else {
-        animation.play("holdend");
+			prevNote.scale.y *= (Conductor.stepCrochet / 100) * 2.2 * speed;
+			prevNote.updateHitbox();
+			prevNote.antialiasing = false;
+		}
+	} else {
+		animation.play("holdend");
 
-        if (prevNote.isSustainNote) {
-            if (prevNote.animation != null)
-                prevNote.animation.play("hold");
+		if (prevNote.isSustainNote) {
+			if (prevNote.animation != null)
+				prevNote.animation.play("hold");
 
-            prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
-            prevNote.updateHitbox();
-            prevNote.centerOffsets();
-            prevNote.sustainScaleY = prevNote.scale.y;
-        }
+			prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
+			prevNote.updateHitbox();
+			prevNote.centerOffsets();
+			prevNote.sustainScaleY = prevNote.scale.y;
+		}
 
-        updateHitbox();
-        centerOffsets();
+		updateHitbox();
+		centerOffsets();
 
-        sustainScaleY = scale.y;
-    }
+		sustainScaleY = scale.y;
+	}
 }
 
 		if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] != null) {
