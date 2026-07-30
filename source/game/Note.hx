@@ -266,53 +266,28 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 			flipY = true;
 
 		if (isSustainNote && prevNote != null) {
-	alpha = 0.6;
+			alpha = 0.6;
 
-	prevNoteStrumtime = prevNote.strumTime;
-	prevNoteIsSustainNote = prevNote.isSustainNote;
+			prevNoteStrumtime = prevNote.strumTime;
+			prevNoteIsSustainNote = prevNote.isSustainNote;
 
-	if (inEditor) {
-		frames = null;
-		makeGraphic(30, 41, flixel.util.FlxColor.WHITE);
-		updateHitbox();
-		centerOffsets();
-		antialiasing = false;
+			animation.play("holdend");
 
-		if (prevNote.isSustainNote) {
-			prevNote.frames = null;
-			prevNote.makeGraphic(30, 41, flixel.util.FlxColor.WHITE);
+			if (prevNote.isSustainNote) {
+				if (prevNote.animation != null)
+					prevNote.animation.play("hold");
 
-			var speed = song.speed;
-			if (utilities.Options.getData("useCustomScrollSpeed"))
-				speed = utilities.Options.getData("customScrollSpeed") / PlayState.songMultiplier;
+				prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
+				prevNote.updateHitbox();
+				prevNote.centerOffsets();
+				prevNote.sustainScaleY = prevNote.scale.y;
+			}
 
-			prevNote.scale.y = (Conductor.stepCrochet / 100) * 1.5 * speed;
-			prevNote.updateHitbox();
-			prevNote.centerOffsets();
-			prevNote.antialiasing = false;
-			
-			prevNote.alpha = 1.0;
-			prevNote.y -= 5;
+			updateHitbox();
+			centerOffsets();
+
+			sustainScaleY = scale.y;
 		}
-	} else {
-		animation.play("holdend");
-
-		if (prevNote.isSustainNote) {
-			if (prevNote.animation != null)
-				prevNote.animation.play("hold");
-
-			prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
-			prevNote.updateHitbox();
-			prevNote.centerOffsets();
-			prevNote.sustainScaleY = prevNote.scale.y;
-		}
-
-		updateHitbox();
-		centerOffsets();
-
-		sustainScaleY = scale.y;
-	}
-}
 
 		if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] != null) {
 			if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] == "true")
