@@ -271,22 +271,38 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else flixel.ad
 			prevNoteStrumtime = prevNote.strumTime;
 			prevNoteIsSustainNote = prevNote.isSustainNote;
 
-			animation.play("holdend");
+			if (inEditor) {
+				frames = null;
+				makeGraphic(8, 15, flixel.util.FlxColor.WHITE);
+				updateHitbox();
+				centerOffsets();
+				antialiasing = false;
 
-			if (prevNote.isSustainNote) {
-				if (prevNote.animation != null)
-					prevNote.animation.play("hold");
+				if (prevNote.isSustainNote) {
+					prevNote.frames = null;
+					prevNote.makeGraphic(8, 15, flixel.util.FlxColor.WHITE);
+					prevNote.updateHitbox();
+					prevNote.centerOffsets();
+					prevNote.antialiasing = false;
+				}
+			} else {
+				animation.play("holdend");
 
-				prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
-				prevNote.updateHitbox();
-				prevNote.centerOffsets();
-				prevNote.sustainScaleY = prevNote.scale.y;
+				if (prevNote.isSustainNote) {
+					if (prevNote.animation != null)
+						prevNote.animation.play("hold");
+
+					prevNote.scale.y *= Conductor.stepCrochet / 100 * SCALE_MULT * speed;
+					prevNote.updateHitbox();
+					prevNote.centerOffsets();
+					prevNote.sustainScaleY = prevNote.scale.y;
+				}
+
+				updateHitbox();
+				centerOffsets();
+
+				sustainScaleY = scale.y;
 			}
-
-			updateHitbox();
-			centerOffsets();
-
-			sustainScaleY = scale.y;
 		}
 
 		if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] != null) {
