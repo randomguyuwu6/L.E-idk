@@ -188,7 +188,7 @@ class OptionsMenu extends MusicBeatState {
 	public var descriptionText:FlxText;
 	public var descriptionBackground:FlxSprite;
 
-	override public function new(defaultPage:String = "Categories", backgroundColor:FlxColor = 0xFFea71fd) {
+	override public function new(defaultPage:String = "Categories", backgroundColor:FlxColor = 0xFF8E0040) {
 		this.defaultPage = defaultPage;
 		this.backgroundColor = backgroundColor;
 		super();
