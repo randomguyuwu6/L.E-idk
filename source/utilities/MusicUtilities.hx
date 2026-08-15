@@ -1,7 +1,11 @@
 package utilities;
 
 import flixel.FlxG;
-import openfl.utils.Assets;
+#if sys
+import sys.FileSystem;
+#end
+
+using StringTools;
 
 class MusicUtilities
 {
@@ -15,38 +19,43 @@ class MusicUtilities
 			return Paths.music(FlxG.save.data.myMusic);
 		}
 
-		// --- DYNAMIC AUTOMATIC DETECTION ---
 		var menuList:Array<String> = [];
 
-		// 1. Add the original freakyMenu if it exists in the assets
-		if (Assets.exists(Paths.music("freakyMenu")))
-		{
-			menuList.push("freakyMenu");
-		}
+		#if sys
+		// Rutas relativas para que funcione en cualquier PC, apuntando directo a tu mod
+		var pathsToCheck:Array<String> = [
+			"assets/music", // El juego base
+			"mods/music" // Por las dudas si en algún momento los ponés en la general
+		];
 
-		// 2. Automatically search for all numbered variants (freakyMenu2, freakyMenu3, freakyMenu4...)
-		var i:Int = 2;
-		while (true)
+		// Escaneamos las carpetas en el disco duro
+		for (folderPath in pathsToCheck)
 		{
-			var testName = "freakyMenu" + i;
-			if (Assets.exists(Paths.music(testName)))
+			if (FileSystem.exists(folderPath) && FileSystem.isDirectory(folderPath))
 			{
-				menuList.push(testName);
-				i++;
-			}
-			else
-			{
-				break; // Stops when sequential numbering ends
+				for (file in FileSystem.readDirectory(folderPath))
+				{
+					// Si encuentra un freakyMenu que sea .ogg, lo agrega solo a la lista
+					if (file.startsWith("freakyMenu") && file.endsWith(".ogg"))
+					{
+						var cleanName = file.substr(0, file.length - 4); // Le quita el .ogg
+						if (!menuList.contains(cleanName))
+						{
+							menuList.push(cleanName);
+						}
+					}
+				}
 			}
 		}
+		#end
 
-		// Fallback to default if no menus were found
+		// Seguridad por si borrás los archivos por error, usa el base
 		if (menuList.length == 0)
 		{
 			menuList.push("freakyMenu");
 		}
 
-		// Pick one randomly from the pool (including the original and custom ones)
+		// Elige uno al azar de todos los que encontró
 		FlxG.save.data.myMusic = FlxG.random.getObject(menuList);
 		FlxG.save.flush();
 
