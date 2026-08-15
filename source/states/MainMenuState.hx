@@ -110,7 +110,7 @@ class MainMenuState extends MusicBeatState {
 			addButton(optionShit[i], i);
 		}
 
-		FlxG.camera.follow(camFollow, null, 0.9);
+		FlxG.camera.follow(camFollow, null, 0.5);
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, TitleState.version, 16);
 		versionShit.scrollFactor.set();
