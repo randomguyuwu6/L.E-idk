@@ -2,7 +2,7 @@
 	"options": [
 		{
 			"option": "enemyStrumsGlow",
-			"value": true
+			"value": false
 		},
 		{
 			"option": "fpsCounter",
@@ -163,11 +163,11 @@
 		},
 		{
 			"option": "missOnShit",
-			"value": true
+			"value": false
 		},
 		{
 			"option": "playerNoteSplashes",
-			"value": true
+			"value": false
 		},
 		{
 			"option": "opponentNoteSplashes",
