@@ -9,33 +9,37 @@ using StringTools;
 
 class MusicUtilities
 {
+	// Variable de sesión: se mantiene fija mientras jugás (para que no se reinicie al dar Enter),
+	// pero se reinicia sola cada vez que cerrás y volvés a abrir el juego para elegir otro al azar.
+	public static var currentMusic:String = null;
+
 	/**
 	 * This function returns the string path of the current music that should be played (as a replacement for the title screen music)
 	 */
 	public static function getTitleMusic():String
 	{
-		if (FlxG.save.data.myMusic != null)
+		// Si ya se eligió una música en esta sesión, la mantenemos sonando sin reiniciar
+		if (currentMusic != null)
 		{
-			return Paths.music(FlxG.save.data.myMusic);
+			return Paths.music(currentMusic);
 		}
 
 		var menuList:Array<String> = [];
 
 		#if sys
-		// Rutas relativas para que funcione en cualquier PC, apuntando directo a tu mod
+		// Rutas donde buscará automáticamente los archivos reales en tu PC
 		var pathsToCheck:Array<String> = [
-			"assets/music", // El juego base
-			"mods/music" // Por las dudas si en algún momento los ponés en la general
+			"assets/music",
+			"mods/music"
 		];
 
-		// Escaneamos las carpetas en el disco duro
+		// Escaneamos el disco duro en busca de los freakyMenu que realmente existan hoy
 		for (folderPath in pathsToCheck)
 		{
 			if (FileSystem.exists(folderPath) && FileSystem.isDirectory(folderPath))
 			{
 				for (file in FileSystem.readDirectory(folderPath))
 				{
-					// Si encuentra un freakyMenu que sea .ogg, lo agrega solo a la lista
 					if (file.startsWith("freakyMenu") && file.endsWith(".ogg"))
 					{
 						var cleanName = file.substr(0, file.length - 4); // Le quita el .ogg
@@ -49,20 +53,19 @@ class MusicUtilities
 		}
 		#end
 
-		// Seguridad por si borrás los archivos por error, usa el base
+		// Seguridad por si no encuentra ninguno
 		if (menuList.length == 0)
 		{
 			menuList.push("freakyMenu");
 		}
 
-		// Elige uno al azar de todos los que encontró
-		FlxG.save.data.myMusic = FlxG.random.getObject(menuList);
-		FlxG.save.flush();
+		// Elige uno al azar exclusivamente entre los archivos que SÍ existen en la carpeta
+		currentMusic = FlxG.random.getObject(menuList);
 
 		if (Date.now().getDay() == 5 && Date.now().getHours() >= 18 || Options.getData("nightMusic"))
 			return Paths.music('freakyNightMenu');
 
-		return Paths.music(FlxG.save.data.myMusic);
+		return Paths.music(currentMusic);
 	}
 
 	/**
