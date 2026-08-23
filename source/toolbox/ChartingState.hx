@@ -1596,9 +1596,6 @@ class ChartingState extends MusicBeatState {
 				FlxG.sound.music.pause();
 				vocals.pause();
 
-				lilBf.animation.play("idle", true);
-				lilOpp.animation.play("idle", true);
-
 				FlxG.sound.music.time = sectionStartTime();
 				vocals.time = FlxG.sound.music.time;
 				updateCurStep();
@@ -1607,8 +1604,6 @@ class ChartingState extends MusicBeatState {
 			updateGrid();
 			updateSectionUI();
 		}
-		lilBf.animation.play("idle", true);
-		lilOpp.animation.play("idle", true);
 	}
 
 	static var doFunnyNumbers:Bool = true;
