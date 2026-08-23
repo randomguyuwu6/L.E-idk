@@ -1148,32 +1148,22 @@ class ChartingState extends MusicBeatState {
 	var updatedSection:Bool = false;
 
 	function sectionStartTime(?section:Int):Float {
-    if (section == null)
-        section = curSection;
+		if (section == null)
+			section = curSection;
 
-    if (section <= 0) return 0.0;
+		var daBPM:Float = _song.bpm;
+		var daPos:Float = 0;
 
-    var curBPM:Float = _song.bpm;
-    var curTimeScale:Array<Int> = (_song.timescale != null) ? _song.timescale : [4, 4];
-    var totalPos:Float = 0.0;
+		for (i in 0...section) {
+			if (_song.notes[i].changeBPM) {
+				daBPM = _song.notes[i].bpm;
+			}
 
-    for (i in 0...section) {
-        if (_song.notes[i] != null) {
-            if (_song.notes[i].changeBPM) {
-                curBPM = _song.notes[i].bpm;
-            }
-            if (_song.notes[i].changeTimeScale && _song.notes[i].timeScale != null) {
-                curTimeScale = _song.notes[i].timeScale;
-            }
+			daPos += Conductor.timeScale[0] * (1000 * (60 / daBPM));
+		}
 
-            var deltaSteps:Int = (_song.notes[i].lengthInSteps > 0) ? _song.notes[i].lengthInSteps : Math.floor((16 / curTimeScale[1]) * curTimeScale[0]);
-            
-            totalPos += ((60 / curBPM) * 1000 / curTimeScale[0]) * deltaSteps;
-        }
-    }
-
-    return totalPos;
-}
+		return daPos;
+	}
 
 	var beatSnap:Int = 16;
 
@@ -1436,36 +1426,29 @@ class ChartingState extends MusicBeatState {
 			}
 
 			if (FlxG.keys.pressed.W || FlxG.keys.pressed.S) {
-					lilBf.animation.play("idle", true);
-					lilOpp.animation.play("idle", true);
-					FlxG.sound.music.pause();
-					vocals.pause();
+				FlxG.sound.music.pause();
+				vocals.pause();
 
-					var daTime:Float = 700 * FlxG.elapsed;
+				var daTime:Float = (FlxG.keys.pressed.SHIFT ? Conductor.stepCrochet : 700 * FlxG.elapsed);
 
-					if (FlxG.keys.pressed.W) {
-						FlxG.sound.music.time -= daTime;
-					} else
-						FlxG.sound.music.time += daTime;
-
-					vocals.time = FlxG.sound.music.time;
+				if (FlxG.keys.pressed.W) {
+					FlxG.sound.music.time -= daTime;
+				} else {
+					FlxG.sound.music.time += daTime;
 				}
-			} else {
-				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.S) {
-					lilBf.animation.play("idle", true);
-					lilOpp.animation.play("idle", true);
-					FlxG.sound.music.pause();
-					vocals.pause();
 
-					var daTime:Float = Conductor.stepCrochet * 2;
+				vocals.time = FlxG.sound.music.time;
 
-					if (FlxG.keys.justPressed.W) {
-						FlxG.sound.music.time -= daTime;
-					} else
-						FlxG.sound.music.time += daTime;
-
-					vocals.time = FlxG.sound.music.time;
+				if (FlxG.sound.music.time < sectionStartTime()) {
+					changeSection(curSection - 1);
 				}
+
+				if (FlxG.sound.music.time > FlxG.sound.music.length) {
+					changeSection(0);
+				}
+
+									Conductor.songPosition = FlxG.sound.music.time;
+
 			}
 
 			var shiftThing:Int = 1;
@@ -1499,7 +1482,6 @@ class ChartingState extends MusicBeatState {
 
 		if (_song.notes[curSection].bpm <= 0)
 			_song.notes[curSection].bpm = 0.1;
-	}
 
 		if (Conductor.songPosition < 0)
 			Conductor.songPosition = 0;
