@@ -128,7 +128,7 @@ class ChartingState extends MusicBeatState {
 			Assets.loadLibrary("shared").onComplete(function(_) {});
 		#end
 
-		menuBG = new FlxSprite().makeBackground(0xFF3AF8A9);
+		menuBG = new FlxSprite().makeBackground(0xFF3D3D3D);
 
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
@@ -994,7 +994,6 @@ class ChartingState extends MusicBeatState {
 
 		FlxG.sound.music = new FlxSound().loadEmbedded(Paths.inst(daSong, _song.specialAudioName ?? difficulty_name, _song.player1));
 		FlxG.sound.music.persist = true;
-		Conductor.songPosition = FlxG.sound.music.time;
 
 		vocals = new SoundGroup(2);
 		if (_song.needsVoices) {
@@ -1017,7 +1016,6 @@ class ChartingState extends MusicBeatState {
 			vocals.time = 0;
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
-			Conductor.songPosition = FlxG.sound.music.time;
 			changeSection();
 		};
 	}
@@ -1237,9 +1235,7 @@ class ChartingState extends MusicBeatState {
 
 		curStep = recalculateSteps();
 
-		if(FlxG.sound.music.playing){
-			Conductor.songPosition += FlxG.elapsed * 1000.0 #if FLX_PITCH * FlxG.sound.music.pitch #end ;
-		}
+		Conductor.songPosition = FlxG.sound.music.time;
 		_song.song = typingShit.text;
 		difficulty = swagShit.text.toLowerCase();
 		PlayState.storyDifficultyStr = difficulty.toUpperCase();
@@ -1421,7 +1417,6 @@ class ChartingState extends MusicBeatState {
 
 					FlxG.sound.music.time -= (FlxG.mouse.wheel * Conductor.stepCrochet * 0.4);
 					vocals.time = FlxG.sound.music.time;
-					Conductor.songPosition = FlxG.sound.music.time;
 				}
 			}
 
@@ -1446,9 +1441,6 @@ class ChartingState extends MusicBeatState {
 				if (FlxG.sound.music.time > FlxG.sound.music.length) {
 					changeSection(0);
 				}
-
-									Conductor.songPosition = FlxG.sound.music.time;
-
 			}
 
 			var shiftThing:Int = 1;
@@ -1569,14 +1561,15 @@ class ChartingState extends MusicBeatState {
 		FlxG.sound.music.pause();
 		vocals.pause();
 
+		// Basically old shit from changeSection???
 		FlxG.sound.music.time = sectionStartTime();
 
 		if (songBeginning) {
 			FlxG.sound.music.time = 0;
 			curSection = 0;
 		}
+
 		vocals.time = FlxG.sound.music.time;
-		Conductor.songPosition = vocals.time;
 		updateCurStep();
 
 		updateGrid();
@@ -1745,33 +1738,29 @@ class ChartingState extends MusicBeatState {
 		gridEventBlackLine = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, Std.int(gridBG.height) * 2, FlxColor.BLACK);
 		add(gridEventBlackLine);
 
-		if (strumLine != null) {
-			strumLine.makeGraphic(Std.int(gridBG.width), 4);
-		}
+		strumLine?.makeGraphic(Std.int(gridBG.width), 4);
 
 		curRenderedNotes.clear();
+
 		curRenderedEvents.clear();
+
 		curRenderedIds.clear();
 
-		var sectionInfo:Array<Dynamic> = [];
-		if (_song.notes[curSection] != null && _song.notes[curSection].sectionNotes != null) {
-			sectionInfo = _song.notes[curSection].sectionNotes.copy();
-		}
+		var sectionInfo:Array<Dynamic> = _song.notes[curSection].sectionNotes;
 
-		if (_song.notes.length > curSection + 1 && _song.notes[curSection + 1] != null && _song.notes[curSection + 1].sectionNotes != null) {
+		if (_song?.notes[curSection + 1]?.sectionNotes != null) {
 			sectionInfo = sectionInfo.concat(_song.notes[curSection + 1].sectionNotes);
 		}
 
-		if (_song.notes[curSection].changeBPM && _song.notes[curSection].bpm > 0) {
+		if (_song.notes[curSection].changeBPM && _song.notes[curSection].bpm > 0)
 			Conductor.changeBPM(_song.notes[curSection].bpm);
-		} else {
+		else {
+			// get last bpm
 			var daBPM:Float = _song.bpm;
 
-			for (i in 0...curSection) {
-				if (_song.notes[i] != null && _song.notes[i].changeBPM) {
+			for (i in 0...curSection)
+				if (_song.notes[i].changeBPM)
 					daBPM = _song.notes[i].bpm;
-				}
-			}
 
 			Conductor.changeBPM(daBPM);
 		}
@@ -1801,8 +1790,6 @@ class ChartingState extends MusicBeatState {
 
 			var note:Note = new Note(daStrumTime, goodNoteInfo, null, false, 0, daType, _song, [0], mustPress, true);
 			note.sustainLength = daSus;
-		}
-	}
 
 			note.setGraphicSize((Std.parseInt(PlayState.instance.arrow_Configs.get(daType)[4]) ?? Std.parseInt(PlayState.instance.arrow_Configs.get(daType)[4])),
 				Std.parseInt(PlayState.instance.arrow_Configs.get(daType)[2]));
