@@ -1782,7 +1782,6 @@ class ChartingState extends MusicBeatState {
 
 		Conductor.changeBPM(daBPM);
 	}
-}
 
 		for (i in sectionInfo) {
 			var daNoteInfo = i[1];
