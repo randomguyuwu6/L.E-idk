@@ -1151,6 +1151,8 @@ class ChartingState extends MusicBeatState {
     if (section == null)
         section = curSection;
 
+    if (section <= 0) return 0.0;
+
     var daBPM:Float = _song.bpm;
     var daPos:Float = 0.0;
 
@@ -1159,13 +1161,11 @@ class ChartingState extends MusicBeatState {
             if (_song.notes[i].changeBPM) {
                 daBPM = _song.notes[i].bpm;
             }
-            
-            var tScale = (_song.notes[i].timeScale != null) ? _song.notes[i].timeScale[0] : Conductor.timeScale[0];
-            daPos += tScale * (1000 * (60 / daBPM));
+            var stepsInSec:Int = (_song.notes[i].lengthInSteps > 0) ? _song.notes[i].lengthInSteps : Conductor.stepsPerSection;
+            daPos += stepsInSec * ((60 / daBPM) * 250);
         }
     }
-
-    return Math.max(0, daPos);
+    return daPos;
 }
 
 	var beatSnap:Int = 16;
@@ -1443,15 +1443,13 @@ class ChartingState extends MusicBeatState {
     vocals.time = FlxG.sound.music.time;
 
     if (FlxG.sound.music.time < sectionStartTime(curSection) && curSection > 0) {
-        changeSection(curSection - 1);
-    }
-
-    if (FlxG.sound.music.time >= sectionStartTime(curSection + 1) && _song.notes[curSection + 1] != null) {
-        changeSection(curSection + 1);
+        changeSection(curSection - 1, true);
+    } else if (FlxG.sound.music.time >= sectionStartTime(curSection + 1) && _song.notes[curSection + 1] != null) {
+        changeSection(curSection + 1, true);
     }
 
     if (FlxG.sound.music.time > FlxG.sound.music.length) {
-        changeSection(0);
+        changeSection(0, true);
     }
 
     Conductor.songPosition = FlxG.sound.music.time;
@@ -1554,22 +1552,23 @@ class ChartingState extends MusicBeatState {
 	}
 
 	function recalculateSteps():Int {
-		var lastChange:BPMChangeEvent = {
-			stepTime: 0,
-			songTime: 0,
-			bpm: 0
-		}
+    if (Conductor.bpmChangeMap.length == 0) return 0;
 
-		for (i in 0...Conductor.bpmChangeMap.length) {
-			if (FlxG.sound.music.time > Conductor.bpmChangeMap[i].songTime)
-				lastChange = Conductor.bpmChangeMap[i];
-		}
+    var lastChange:BPMChangeEvent = Conductor.bpmChangeMap[0];
 
-		curStep = lastChange.stepTime + Math.floor((FlxG.sound.music.time - lastChange.songTime) / Conductor.stepCrochet);
-		updateBeat();
+    for (i in 0...Conductor.bpmChangeMap.length) {
+        if (FlxG.sound.music.time >= Conductor.bpmChangeMap[i].songTime)
+            lastChange = Conductor.bpmChangeMap[i];
+    }
 
-		return curStep;
-	}
+    var targetBPM = (lastChange.bpm > 0) ? lastChange.bpm : Conductor.bpm;
+    var stepC = (60 / targetBPM) * 250;
+    
+    curStep = lastChange.stepTime + Math.floor((FlxG.sound.music.time - lastChange.songTime) / stepC);
+    updateBeat();
+
+    return curStep;
+}
 
 	function resetSection(songBeginning:Bool = false):Void {
 		FlxG.sound.music.pause();
