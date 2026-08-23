@@ -1569,7 +1569,6 @@ class ChartingState extends MusicBeatState {
 		FlxG.sound.music.pause();
 		vocals.pause();
 
-		// Basically old shit from changeSection???
 		FlxG.sound.music.time = sectionStartTime();
 
 		if (songBeginning) {
@@ -1585,21 +1584,21 @@ class ChartingState extends MusicBeatState {
 	}
 
 	function changeSection(sec:Int = 0, ?updateMusic:Bool = true):Void {
-	if (_song.notes[sec] != null) {
-		curSection = sec;
+		if (_song.notes[sec] != null) {
+			curSection = sec;
 
-		if (updateMusic) {
-			FlxG.sound.music.pause();
-			vocals.pause();
+			if (updateMusic) {
+				FlxG.sound.music.pause();
+				vocals.pause();
 
-			Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
-			updateCurStep();
+				Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
+				updateCurStep();
+			}
+
+			updateGrid();
+			updateSectionUI();
 		}
-
-		updateGrid();
-		updateSectionUI();
 	}
-}
 
 		curSection = sec;
 
