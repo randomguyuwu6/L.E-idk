@@ -1588,14 +1588,7 @@ class ChartingState extends MusicBeatState {
 	if (sec < 0) sec = 0;
 
 	if (_song.notes[sec] == null) {
-		_song.notes[sec] = {
-			lengthInSteps: 16,
-			bpm: _song.bpm,
-			changeBPM: false,
-			mustHitSection: true,
-			sectionNotes: [],
-			altAnim: false
-		};
+		_song.notes[sec] = new Section();
 	}
 
 	curSection = sec;
