@@ -1151,28 +1151,18 @@ class ChartingState extends MusicBeatState {
 		if (section == null)
 			section = curSection;
 
-		if (section <= 0) return 0.0;
-
-		var curBPM:Float = _song.bpm;
-		var curTimeScale:Array<Int> = (_song.timescale != null) ? _song.timescale : [4, 4];
-		var totalPos:Float = 0.0;
+		var daBPM:Float = _song.bpm;
+		var daPos:Float = 0;
 
 		for (i in 0...section) {
-			if (_song.notes[i] != null) {
-				if (_song.notes[i].changeBPM) {
-					curBPM = _song.notes[i].bpm;
-				}
-				if (_song.notes[i].changeTimeScale && _song.notes[i].timeScale != null) {
-					curTimeScale = _song.notes[i].timeScale;
-				}
-
-				var deltaSteps:Int = (_song.notes[i].lengthInSteps > 0) ? _song.notes[i].lengthInSteps : Math.floor((16 / curTimeScale[1]) * curTimeScale[0]);
-				
-				totalPos += ((60 / curBPM) * 1000 / curTimeScale[0]) * deltaSteps;
+			if (_song.notes[i].changeBPM) {
+				daBPM = _song.notes[i].bpm;
 			}
+
+			daPos += Conductor.timeScale[0] * (1000 * (60 / daBPM));
 		}
 
-		return totalPos;
+		return daPos;
 	}
 
 	var beatSnap:Int = 16;
