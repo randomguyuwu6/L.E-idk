@@ -1600,20 +1600,6 @@ class ChartingState extends MusicBeatState {
 		}
 	}
 
-		curSection = sec;
-
-		if (updateMusic) {
-			FlxG.sound.music.pause();
-			vocals.pause();
-
-			Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
-			updateCurStep();
-		}
-
-		updateGrid();
-		updateSectionUI();
-	}
-
 	static var doFunnyNumbers:Bool = true;
 
 	function copySection(?sectionNum:Int = 1) {
@@ -1784,8 +1770,35 @@ class ChartingState extends MusicBeatState {
 			}
 
 			Conductor.changeBPM(daBPM);
+		}
+
+		for (i in sectionInfo) {
+			var daNoteInfo = i[1];
+			var daStrumTime = i[0];
+			var daSus = i[2];
+
+			var daType = i[4];
+
+			if (daType == null)
+				daType = "default";
+
+			var mustPress = daNoteInfo >= _song.keyCount;
+
+			if (_song.notes[curSection].mustHitSection)
+				mustPress = !(daNoteInfo >= _song.playerKeyCount);
+
+			var goodNoteInfo = daNoteInfo % (mustPress ? _song.playerKeyCount : _song.keyCount);
+
+			if (!_song.notes[curSection].mustHitSection && mustPress)
+				goodNoteInfo = daNoteInfo - _song.keyCount;
+
+			if (_song.notes[curSection].mustHitSection && !mustPress)
+				goodNoteInfo = daNoteInfo - _song.playerKeyCount;
+
+			var note:Note = new Note(daStrumTime, goodNoteInfo, null, false, 0, daType, _song, [0], mustPress, true);
+			note.sustainLength = daSus;
+		}
 	}
-}
 		for (i in sectionInfo) {
 			var daNoteInfo = i[1];
 			var daStrumTime = i[0];
