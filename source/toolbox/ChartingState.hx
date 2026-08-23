@@ -1165,7 +1165,7 @@ class ChartingState extends MusicBeatState {
         }
     }
 
-    return Math.max(0, daPos;
+    return Math.max(0, daPos);
 }
 
 	var beatSnap:Int = 16;
