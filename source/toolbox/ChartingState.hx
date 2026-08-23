@@ -1746,16 +1746,18 @@ class ChartingState extends MusicBeatState {
 		add(gridEventBlackLine);
 
 		if (strumLine != null) {
-    strumLine.makeGraphic(Std.int(gridBG.width), 4);
-}
+			strumLine.makeGraphic(Std.int(gridBG.width), 4);
+		}
 
 		curRenderedNotes.clear();
 		curRenderedEvents.clear();
 		curRenderedIds.clear();
 
-		var sectionInfo:Array<Dynamic> = _song.notes[curSection].sectionNotes;
+		var sectionInfo:Array<Dynamic> = [];
+		if (_song.notes[curSection] != null && _song.notes[curSection].sectionNotes != null) {
+			sectionInfo = _song.notes[curSection].sectionNotes.copy();
+		}
 
-		// Blindaje de previsualización segura de la 1.1.2
 		if (_song.notes.length > curSection + 1 && _song.notes[curSection + 1] != null && _song.notes[curSection + 1].sectionNotes != null) {
 			sectionInfo = sectionInfo.concat(_song.notes[curSection + 1].sectionNotes);
 		}
@@ -1801,31 +1803,6 @@ class ChartingState extends MusicBeatState {
 			note.sustainLength = daSus;
 		}
 	}
-		for (i in sectionInfo) {
-			var daNoteInfo = i[1];
-			var daStrumTime = i[0];
-			var daSus = i[2];
-
-			var daType = i[4];
-
-			if (daType == null)
-				daType = "default";
-
-			var mustPress = daNoteInfo >= _song.keyCount;
-
-			if (_song.notes[curSection].mustHitSection)
-				mustPress = !(daNoteInfo >= _song.playerKeyCount);
-
-			var goodNoteInfo = daNoteInfo % (mustPress ? _song.playerKeyCount : _song.keyCount);
-
-			if (!_song.notes[curSection].mustHitSection && mustPress)
-				goodNoteInfo = daNoteInfo - _song.keyCount;
-
-			if (_song.notes[curSection].mustHitSection && !mustPress)
-				goodNoteInfo = daNoteInfo - _song.playerKeyCount;
-
-			var note:Note = new Note(daStrumTime, goodNoteInfo, null, false, 0, daType, _song, [0], mustPress, true);
-			note.sustainLength = daSus;
 
 			note.setGraphicSize((Std.parseInt(PlayState.instance.arrow_Configs.get(daType)[4]) ?? Std.parseInt(PlayState.instance.arrow_Configs.get(daType)[4])),
 				Std.parseInt(PlayState.instance.arrow_Configs.get(daType)[2]));
