@@ -1585,20 +1585,33 @@ class ChartingState extends MusicBeatState {
 	}
 
 	function changeSection(sec:Int = 0, ?updateMusic:Bool = true):Void {
-		if (_song.notes[sec] != null) {
-			curSection = sec;
+		// Evitamos índices negativos
+		if (sec < 0) sec = 0;
 
-			if (updateMusic) {
-				FlxG.sound.music.pause();
-				vocals.pause();
-
-				Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
-				updateCurStep();
-			}
-
-			updateGrid();
-			updateSectionUI();
+		// Si la sección a la que queremos ir no existe en el JSON, la creamos automáticamente al vuelo
+		if (_song.notes[sec] == null) {
+			_song.notes[sec] = {
+				lengthInSteps: 16,
+				bpm: _song.bpm,
+				changeBPM: false,
+				mustHitSection: true,
+				sectionNotes: [],
+				altAnim: false
+			};
 		}
+
+		curSection = sec;
+
+		if (updateMusic) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+
+			Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
+			updateCurStep();
+		}
+
+		updateGrid();
+		updateSectionUI();
 	}
 
 	static var doFunnyNumbers:Bool = true;
@@ -1749,13 +1762,12 @@ class ChartingState extends MusicBeatState {
 		strumLine?.makeGraphic(Std.int(gridBG.width), 4);
 
 		curRenderedNotes.clear();
-
 		curRenderedEvents.clear();
-
 		curRenderedIds.clear();
 
 		var sectionInfo:Array<Dynamic> = _song.notes[curSection].sectionNotes;
 
+		// Blindaje de previsualización segura de la 1.1.2
 		if (_song?.notes[curSection + 1]?.sectionNotes != null) {
 			sectionInfo = sectionInfo.concat(_song.notes[curSection + 1].sectionNotes);
 		}
@@ -1763,15 +1775,18 @@ class ChartingState extends MusicBeatState {
 		if (_song.notes[curSection].changeBPM && _song.notes[curSection].bpm > 0)
 			Conductor.changeBPM(_song.notes[curSection].bpm);
 		else {
-			// get last bpm
 			var daBPM:Float = _song.bpm;
 
-			for (i in 0...curSection)
-				if (_song.notes[i].changeBPM)
+			// SECCIÓN PROTEGIDA CONTRA NULOS:
+			for (i in 0...curSection) {
+				if (_song.notes[i] != null && _song.notes[i].changeBPM) {
 					daBPM = _song.notes[i].bpm;
+				}
+			}
 
 			Conductor.changeBPM(daBPM);
 		}
+	}
 
 		for (i in sectionInfo) {
 			var daNoteInfo = i[1];
