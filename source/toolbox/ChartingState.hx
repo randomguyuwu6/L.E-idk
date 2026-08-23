@@ -1745,7 +1745,9 @@ class ChartingState extends MusicBeatState {
 		gridEventBlackLine = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, Std.int(gridBG.height) * 2, FlxColor.BLACK);
 		add(gridEventBlackLine);
 
-		strumLine?.makeGraphic(Std.int(gridBG.width), 4);
+		if (strumLine != null) {
+    strumLine.makeGraphic(Std.int(gridBG.width), 4);
+}
 
 		curRenderedNotes.clear();
 		curRenderedEvents.clear();
@@ -1754,7 +1756,7 @@ class ChartingState extends MusicBeatState {
 		var sectionInfo:Array<Dynamic> = _song.notes[curSection].sectionNotes;
 
 		// Blindaje de previsualización segura de la 1.1.2
-		if (_song?.notes[curSection + 1]?.sectionNotes != null) {
+		if (_song.notes.length > curSection + 1 && _song.notes[curSection + 1] != null && _song.notes[curSection + 1].sectionNotes != null) {
 			sectionInfo = sectionInfo.concat(_song.notes[curSection + 1].sectionNotes);
 		}
 
