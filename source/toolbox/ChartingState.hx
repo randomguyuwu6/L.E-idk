@@ -1155,7 +1155,7 @@ class ChartingState extends MusicBeatState {
 		var daPos:Float = 0;
 
 		for (i in 0...section) {
-			if (_song.notes[i].changeBPM) {
+			if (_song.notes[i] != null && _song.notes[i].changeBPM) {
 				daBPM = _song.notes[i].bpm;
 			}
 
@@ -1585,20 +1585,30 @@ class ChartingState extends MusicBeatState {
 	}
 
 	function changeSection(sec:Int = 0, ?updateMusic:Bool = true):Void {
+		trace('changing section' + sec);
+
 		if (_song.notes[sec] != null) {
 			curSection = sec;
+
+			updateGrid();
 
 			if (updateMusic) {
 				FlxG.sound.music.pause();
 				vocals.pause();
 
-				Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
+				lilBf.animation.play("idle", true);
+				lilOpp.animation.play("idle", true);
+
+				FlxG.sound.music.time = sectionStartTime();
+				vocals.time = FlxG.sound.music.time;
 				updateCurStep();
 			}
 
 			updateGrid();
 			updateSectionUI();
 		}
+		lilBf.animation.play("idle", true);
+		lilOpp.animation.play("idle", true);
 	}
 
 	static var doFunnyNumbers:Bool = true;
