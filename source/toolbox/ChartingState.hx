@@ -1151,18 +1151,22 @@ class ChartingState extends MusicBeatState {
 		if (section == null)
 			section = curSection;
 
-		var daBPM:Float = _song.bpm;
-		var daPos:Float = 0;
+		if (section <= 0) return 0.0;
+
+		var curBPM:Float = _song.bpm;
+		var totalPos:Float = 0.0;
 
 		for (i in 0...section) {
-			if (_song.notes[i] != null && _song.notes[i].changeBPM) {
-				daBPM = _song.notes[i].bpm;
+			if (_song.notes[i] != null) {
+				if (_song.notes[i].changeBPM && _song.notes[i].bpm > 0) {
+					curBPM = _song.notes[i].bpm;
+				}
+				var steps:Int = _song.notes[i].lengthInSteps > 0 ? _song.notes[i].lengthInSteps : 16;
+				totalPos += (60 / curBPM) * 1000 * (steps / 4);
 			}
-
-			daPos += Conductor.timeScale[0] * (1000 * (60 / daBPM));
 		}
 
-		return daPos;
+		return totalPos;
 	}
 
 	var beatSnap:Int = 16;
@@ -1585,19 +1589,14 @@ class ChartingState extends MusicBeatState {
 	}
 
 	function changeSection(sec:Int = 0, ?updateMusic:Bool = true):Void {
-		trace('changing section' + sec);
-
 		if (_song.notes[sec] != null) {
 			curSection = sec;
-
-			updateGrid();
 
 			if (updateMusic) {
 				FlxG.sound.music.pause();
 				vocals.pause();
 
-				FlxG.sound.music.time = sectionStartTime();
-				vocals.time = FlxG.sound.music.time;
+				Conductor.songPosition = FlxG.sound.music.time = vocals.time = sectionStartTime(sec);
 				updateCurStep();
 			}
 
