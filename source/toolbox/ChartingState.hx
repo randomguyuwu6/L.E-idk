@@ -1499,6 +1499,7 @@ class ChartingState extends MusicBeatState {
 
 		if (_song.notes[curSection].bpm <= 0)
 			_song.notes[curSection].bpm = 0.1;
+	}
 
 		if (Conductor.songPosition < 0)
 			Conductor.songPosition = 0;
