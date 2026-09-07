@@ -604,6 +604,7 @@ class PlayState extends MusicBeatState {
 	override function create() {
 		// set instance because duh
 		instance = this;
+		FlxG.autoPause = false;
 		tweenManager = new FlxTweenManager();
 		replay = new Replay();
 
